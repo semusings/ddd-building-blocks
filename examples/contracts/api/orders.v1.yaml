@@ -1,0 +1,15 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Orders API - v1
+  description: Order APIs specification for retail management system.
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+  contact:
+    email: bot.bhuwan@gmail.com
+    url: 'http://bhuwanupadhyay.github.io/'
+    name: Bhuwan Prasad Upadhyay
+servers:
+  - description: DDD building blocks best practices
+    url: 'https://bhuwanupdhyay.github.io/17-ddd-building-blocks-best-practices'
