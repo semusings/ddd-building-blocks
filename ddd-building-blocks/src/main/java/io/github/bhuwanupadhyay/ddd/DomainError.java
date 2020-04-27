@@ -1,5 +1,7 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
+
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -51,3 +53,4 @@ public final class DomainError extends ValueObject {
         + '}';
   }
 }
+// end::code[]

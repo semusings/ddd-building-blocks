@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,3 +32,4 @@ public abstract class AggregateRoot<ID extends ValueObject> extends Entity<ID> {
     return Collections.unmodifiableList(domainEvents);
   }
 }
+// end::code[]

@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
 import java.util.Objects;
 
 public abstract class Entity<Id extends ValueObject> {
@@ -37,3 +38,4 @@ public abstract class Entity<Id extends ValueObject> {
     return this.getClass().getName();
   }
 }
+// end::code[]

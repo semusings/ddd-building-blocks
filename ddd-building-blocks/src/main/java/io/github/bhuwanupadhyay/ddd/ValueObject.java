@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
 import java.util.Objects;
 
 public abstract class ValueObject {
@@ -29,3 +30,4 @@ public abstract class ValueObject {
     return this.getClass().getName();
   }
 }
+// end::code[]

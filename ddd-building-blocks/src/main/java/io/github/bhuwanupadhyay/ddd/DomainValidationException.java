@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,3 +18,4 @@ public final class DomainValidationException extends RuntimeException {
     return Collections.unmodifiableList(domainErrors);
   }
 }
+// end::code[]

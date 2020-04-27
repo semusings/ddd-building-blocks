@@ -1,5 +1,7 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
+
 import java.util.UUID;
 
 public abstract class DomainEvent {
@@ -39,9 +41,10 @@ public abstract class DomainEvent {
     /** Represents domain event is only for other bounded context. */
     OUTSIDE_CONTEXT,
     /**
-     * Represents domain event is available for both i.e. inside same bounded context and other bounded
-     * context.
+     * Represents domain event is available for both i.e. inside same bounded context and other
+     * bounded context.
      */
     BOTH
   }
 }
+// end::code[]

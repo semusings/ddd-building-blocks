@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
+// tag::code[]
 import java.util.List;
 import java.util.Optional;
 
@@ -32,3 +33,4 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
     return getClass().getName();
   }
 }
+// end::code[]
