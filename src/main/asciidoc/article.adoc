@@ -16,7 +16,7 @@ Separating these two in the software itself makes it easier to design, model, bu
 In the implementation, DDD building blocks play an important role in how business is modeled into the code.
 In this article, I will take you through the best available options for building blocks in object-oriented principles.
 
-image::assets/layer.png[]
+image::../assets/layer.png[]
 
 === Value Object
 
@@ -74,4 +74,4 @@ include::../../../ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd
 
 === Example Scenario
 
-image::assets/rtms.png[]
+image::../assets/rtms.png[]
