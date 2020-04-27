@@ -1,5 +1,5 @@
-= Factory Parent Example
-:repo: factory-parent-example
+= DDD Building Blocks Best Practices
+:repo: 17-ddd-building-blocks-best-practices
 :github: https://github.com/BhuwanUpadhyay/{repo}
 :githubmaster: {github}/tree/master
 :revnumber: {project-version}

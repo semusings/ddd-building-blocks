@@ -1,1 +1,1 @@
-Factory Parent Example is a base template project for maven.
+DDD Building Blocks Best Practices is a base template project for maven.
