@@ -51,6 +51,8 @@ include::../../../ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd
 
 === Domain Event
 
+image::../assets/aggregate_transaction.png[]
+
 [source,java]
 ----
 include::../../../ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd/DomainEvent.java[tags=code,indent=0]
