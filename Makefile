@@ -22,11 +22,10 @@ build: ## Build the project
 	./cicd/ci/build.sh
 
 full-build: ## Full build the project
-	@read -p "Sonar Login: " passwd; \
 	CI_SECURE_ENV_VARS=true \
 	SONAR_ORGANIZATION=bhuwanupadhyay \
 	SONAR_HOST=https://sonarcloud.io \
-	SONAR_LOGIN=$$passwd \
+	SONAR_LOGIN=bade75026545c8b9c46bc21ef2efdcdcbcc033e6 \
 	./cicd/ci/build.sh
 
 ##@ Releasing

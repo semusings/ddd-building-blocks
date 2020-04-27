@@ -3,13 +3,13 @@ package io.github.bhuwanupadhyay.ddd;
 // tag::code[]
 import java.util.Objects;
 
-public abstract class Entity<Id extends ValueObject> {
+public abstract class Entity<ID extends ValueObject> {
 
   public static final String ENTITY_ID_IS_REQUIRED = "Entity Id is required.";
 
-  private final Id id;
+  private final ID id;
 
-  public Entity(Id id) {
+  public Entity(ID id) {
 
     DomainAsserts.raiseIfNull(
         id, DomainError.create(getObjectName() + ".id", ENTITY_ID_IS_REQUIRED));
@@ -17,7 +17,7 @@ public abstract class Entity<Id extends ValueObject> {
     this.id = id;
   }
 
-  public Id getId() {
+  public ID getId() {
     return this.id;
   }
 

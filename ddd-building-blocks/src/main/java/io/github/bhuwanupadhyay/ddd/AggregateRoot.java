@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class AggregateRoot<ID extends ValueObject> extends Entity<ID> {
 
-  private final List<DomainEvent> domainEvents = new ArrayList<>();
+  private final transient List<DomainEvent> domainEvents = new ArrayList<>();
 
   public AggregateRoot(ID id) {
     super(id);
