@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Orders API - v1
+  title: Orders API
   description: Order APIs specification for retail management system.
   license:
     name: Apache 2.0
@@ -13,3 +13,57 @@ info:
 servers:
   - description: DDD building blocks best practices
     url: 'https://bhuwanupdhyay.github.io/17-ddd-building-blocks-best-practices'
+components:
+  schemas:
+    OrderPageList:
+      title: OrderPageList
+      type: object
+      properties:
+        content:
+          type: array
+          items: {}
+        page:
+          type: object
+    CreateOrder:
+      title: CreateOrder
+      type: object
+      description: Create order command request payload.
+      properties:
+        customer:
+          type: string
+        deliveryAddress:
+          type: string
+        contactPhone:
+          type: string
+        product:
+          type: string
+      required:
+        - customer
+        - deliveryAddress
+        - contactPhone
+        - product
+    PageResource:
+      title: PageResource
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+    OrderResource:
+      title: OrderResource
+      type: object
+      properties:
+        id:
+          type: string
+        customer:
+          type: string
+        deliveryAddress:
+          type: string
+        contactPhone:
+          type: string
+        product:
+          type: string
