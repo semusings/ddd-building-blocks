@@ -19,6 +19,10 @@ public final class DomainAsserts {
     begin().raiseIfNull(value, error).ifHasErrorsThrow();
   }
 
+  public static void raiseIfBlank(String value, Supplier<DomainError> error) {
+    begin().raiseIfBlank(value, error).ifHasErrorsThrow();
+  }
+
   public static class DomainAssert {
     private final List<DomainError> domainErrors = new ArrayList<>();
 

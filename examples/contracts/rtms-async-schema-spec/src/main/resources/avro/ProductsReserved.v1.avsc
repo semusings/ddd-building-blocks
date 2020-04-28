@@ -4,14 +4,6 @@
   "namespace": "io.github.bhuwanupadhyay.rtms.v1",
   "fields": [
     {
-      "name": "productId",
-      "type": "string"
-    },
-    {
-      "name": "quantity",
-      "type": "int"
-    },
-    {
       "name": "orderId",
       "type": "string"
     }

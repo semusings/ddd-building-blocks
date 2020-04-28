@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.ddd;
 
 // tag::code[]
-import java.util.List;
+
 import java.util.Optional;
 
 public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends ValueObject> {
@@ -26,8 +26,6 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
   }
 
   protected abstract T persist(T entity);
-
-  public abstract List<T> findAll();
 
   public String objectName() {
     return getClass().getName();

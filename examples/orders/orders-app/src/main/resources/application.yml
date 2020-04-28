@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              autoBindDlq: true
+      bindings:
+        output:
+          contentType: 'application/*+avro'
+          group: rtms
+        input:
+          destination: input
+          group: rtms

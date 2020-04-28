@@ -8,13 +8,12 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.github.bhuwanupadhyay.rtms</groupId>
 	<artifactId>examples</artifactId>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>orders</module>
 		<module>contracts</module>
+		<module>orders</module>
 	</modules>
 
 

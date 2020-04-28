@@ -41,13 +41,21 @@ public final class DomainError extends ValueObject {
     return Objects.hash(errorCode, errorMessage);
   }
 
+  public String getErrorCode() {
+    return errorCode;
+  }
+
+  public String getErrorMessage() {
+    return errorMessage;
+  }
+
   @Override
   public String toString() {
     return "DomainError{"
-        + "violator='"
+        + "errorCode='"
         + errorCode
         + '\''
-        + ", message='"
+        + ", errorMessage='"
         + errorMessage
         + '\''
         + '}';
