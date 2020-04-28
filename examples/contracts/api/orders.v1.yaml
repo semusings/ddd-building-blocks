@@ -74,7 +74,7 @@ components:
 paths:
   /orders:
     get:
-      summary: Your GET endpoint
+      summary: GET orders.
       tags: []
       responses:
         '200':
@@ -96,7 +96,7 @@ paths:
           in: query
           name: sort
     post:
-      summary: ''
+      summary: POST orders.
       operationId: post-orders
       responses:
         '200':
@@ -112,3 +112,21 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateOrder'
         description: Create order command.
+  '/orders/{orderId}':
+    parameters:
+      - schema:
+          type: string
+        name: orderId
+        in: path
+        required: true
+    get:
+      summary: GET orders by order id.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResource'
+      operationId: get-orders-by-orderId
+      description: Get orders by order id.
