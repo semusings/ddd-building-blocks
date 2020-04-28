@@ -11,7 +11,7 @@ info:
     url: 'http://bhuwanupadhyay.github.io/'
     name: Bhuwan Prasad Upadhyay
 servers:
-  - description: DDD building blocks best practices
+  - description: DDD building blocks best practices.
     url: 'https://bhuwanupdhyay.github.io'
 components:
   schemas:
@@ -74,10 +74,12 @@ components:
 paths:
   /orders:
     get:
-      summary: GET orders
+      summary: Your GET endpoint
+      tags: []
       responses:
         '200':
           description: OK
+          headers: {}
           content:
             application/json:
               schema:
@@ -94,7 +96,7 @@ paths:
           in: query
           name: sort
     post:
-      summary: POST orders
+      summary: ''
       operationId: post-orders
       responses:
         '200':
