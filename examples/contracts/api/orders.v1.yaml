@@ -12,7 +12,7 @@ info:
     name: Bhuwan Prasad Upadhyay
 servers:
   - description: DDD building blocks best practices
-    url: 'https://bhuwanupdhyay.github.io/17-ddd-building-blocks-best-practices'
+    url: 'https://bhuwanupdhyay.github.io'
 components:
   schemas:
     OrderPageList:
@@ -21,9 +21,11 @@ components:
       properties:
         content:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/OrderResource'
         page:
-          type: object
+          $ref: '#/components/schemas/PageResource'
+      description: Order list with pagination.
     CreateOrder:
       title: CreateOrder
       type: object
@@ -53,6 +55,7 @@ components:
           format: int64
         totalPages:
           type: integer
+      description: Pagination page resource.
     OrderResource:
       title: OrderResource
       type: object
@@ -67,3 +70,43 @@ components:
           type: string
         product:
           type: string
+      description: Order response model.
+paths:
+  /orders:
+    get:
+      summary: GET orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderPageList'
+      operationId: get-orders
+      description: Get orders with pagination API.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: filterJson
+        - schema:
+            type: string
+          in: query
+          name: sort
+    post:
+      summary: POST orders
+      operationId: post-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResource'
+      description: Create new order API.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+        description: Create order command.
