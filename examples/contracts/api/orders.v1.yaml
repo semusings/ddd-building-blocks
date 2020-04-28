@@ -31,19 +31,19 @@ components:
       type: object
       description: Create order command request payload.
       properties:
-        customer:
+        customerId:
           type: string
         deliveryAddress:
           type: string
         contactPhone:
           type: string
-        product:
+        productId:
           type: string
       required:
-        - customer
+        - customerId
         - deliveryAddress
         - contactPhone
-        - product
+        - productId
     PageResource:
       title: PageResource
       type: object
@@ -59,18 +59,18 @@ components:
     OrderResource:
       title: OrderResource
       type: object
+      description: Order response model.
       properties:
         id:
           type: string
-        customer:
+        customerId:
           type: string
         deliveryAddress:
           type: string
         contactPhone:
           type: string
-        product:
+        productId:
           type: string
-      description: Order response model.
 paths:
   /orders:
     get:
