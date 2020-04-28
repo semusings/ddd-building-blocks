@@ -75,7 +75,8 @@ paths:
   /orders:
     get:
       summary: GET orders.
-      tags: []
+      tags:
+        - orders
       responses:
         '200':
           description: OK
@@ -130,3 +131,5 @@ paths:
                 $ref: '#/components/schemas/OrderResource'
       operationId: get-orders-by-orderId
       description: Get orders by order id.
+      tags:
+        - orders
