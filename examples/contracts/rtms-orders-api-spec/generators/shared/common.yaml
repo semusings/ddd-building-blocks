@@ -1,0 +1,4 @@
+inputSpec: src/main/resources/orders.v1.yaml
+groupId: 'io.github.bhuwanupadhyay.rtms'
+generateApiDocumentation: 'false'
+generateSupportingFiles: 'false'

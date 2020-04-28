@@ -1,7 +1,7 @@
 {
-  "name": "ReserveProducts",
+  "name": "ProductsReserved",
   "type": "record",
-  "namespace": "io.github.bhuwanupadhyay.example.orders.v1",
+  "namespace": "io.github.bhuwanupadhyay.rtms.v1",
   "fields": [
     {
       "name": "productId",
