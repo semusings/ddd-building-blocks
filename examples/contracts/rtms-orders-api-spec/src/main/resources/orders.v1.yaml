@@ -113,6 +113,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateOrder'
         description: Create order command.
+      tags:
+        - orders
   '/orders/{orderId}':
     parameters:
       - schema:

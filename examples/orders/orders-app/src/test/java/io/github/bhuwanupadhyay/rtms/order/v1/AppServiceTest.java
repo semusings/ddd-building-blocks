@@ -1,12 +1,8 @@
-package io.github.bhuwanupadhyay.rtms.order.v1.service;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import io.github.bhuwanupadhyay.rtms.order.v1.AppDataException;
-import io.github.bhuwanupadhyay.rtms.order.v1.AppService;
-import io.github.bhuwanupadhyay.rtms.order.v1.OrderDomainRepository;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +27,7 @@ class AppServiceTest {
   void givenOrderIsNotExist_whenConsume_thenShouldAbortFurtherProcessing() {
     final String alienOrderId = "alienOrderId";
 
-    given(domainRepository.findOne(eq(new OrderId(alienOrderId)))).willReturn(Optional.empty());
+    given(domainRepository.findOne(new OrderId(alienOrderId))).willReturn(Optional.empty());
 
     Assertions.assertThrows(
         AppDataException.class, () -> this.appService.submitPayment(alienOrderId));

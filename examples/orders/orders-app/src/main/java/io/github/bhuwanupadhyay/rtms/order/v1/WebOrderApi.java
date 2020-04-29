@@ -6,13 +6,12 @@ import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrdersApi;
+import java.util.Optional;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @RestController
 class WebOrderApi implements OrdersApi {

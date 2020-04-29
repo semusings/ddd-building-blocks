@@ -37,7 +37,16 @@ public final class DomainError extends ValueObject {
   }
 
   @Override
-  protected int toHashCode() {
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    DomainError that = (DomainError) o;
+    return Objects.equals(errorCode, that.errorCode)
+        && Objects.equals(errorMessage, that.errorMessage);
+  }
+
+  @Override
+  public int hashCode() {
     return Objects.hash(errorCode, errorMessage);
   }
 

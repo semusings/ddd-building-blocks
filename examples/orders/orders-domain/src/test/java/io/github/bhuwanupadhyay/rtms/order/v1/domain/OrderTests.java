@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.DomainValidationException;
+import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ListAssert;

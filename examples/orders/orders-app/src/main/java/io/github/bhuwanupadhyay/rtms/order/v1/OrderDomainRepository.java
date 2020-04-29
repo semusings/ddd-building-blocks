@@ -4,12 +4,11 @@ import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 import io.github.bhuwanupadhyay.ddd.DomainRepository;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-final class OrderDomainRepository extends DomainRepository<Order, OrderId> {
+class OrderDomainRepository extends DomainRepository<Order, OrderId> {
 
   OrderDomainRepository(DomainEventPublisher publisher) {
     super(publisher);

@@ -4,12 +4,11 @@ import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
+import java.util.UUID;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
-final class AppService {
+class AppService {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
