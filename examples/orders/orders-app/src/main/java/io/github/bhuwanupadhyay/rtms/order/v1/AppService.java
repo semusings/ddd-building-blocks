@@ -1,26 +1,25 @@
-package io.github.bhuwanupadhyay.rtms.order.service;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import io.github.bhuwanupadhyay.rtms.order.exception.AppDataException;
-import io.github.bhuwanupadhyay.rtms.order.repository.OrderDomainRepository;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
-import java.util.UUID;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
-public final class AppService {
+final class AppService {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   private final OrderDomainRepository domainRepository;
 
-  public AppService(OrderDomainRepository domainRepository) {
+  AppService(OrderDomainRepository domainRepository) {
     this.domainRepository = domainRepository;
   }
 
-  public void submitPayment(String orderId) {
+  void submitPayment(String orderId) {
 
     LOG.atInfo().log("Submitting payment for order %s", orderId);
 
@@ -31,7 +30,7 @@ public final class AppService {
     LOG.atInfo().log("Created payment request for an order %s.", order.getId().getReference());
   }
 
-  public Order placeOrder(CreateOrder createOrder) {
+  Order placeOrder(CreateOrder createOrder) {
     OrderId orderId = new OrderId(UUID.randomUUID().toString());
 
     LOG.atInfo().log("Placing new order %s", orderId.getReference());

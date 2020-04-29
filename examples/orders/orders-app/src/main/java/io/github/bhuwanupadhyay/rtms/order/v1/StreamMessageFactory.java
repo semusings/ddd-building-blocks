@@ -1,8 +1,7 @@
-package io.github.bhuwanupadhyay.rtms.order.integration;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.rtms.order.domain.PaymentRequested;
-import io.github.bhuwanupadhyay.rtms.order.exception.AppIntegrationException;
 import io.github.bhuwanupadhyay.rtms.v1.SubmitPayment;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.messaging.Message;
@@ -20,14 +19,13 @@ final class StreamMessageFactory {
 
   private StreamMessageFactory() {}
 
-  public static Message<?> create(DomainEvent domainEvent) {
+  static Message<?> create(DomainEvent domainEvent) {
     Map<String, Object> headers = new HashMap<>();
 
     Class<? extends SpecificRecord> namespace =
         Optional.ofNullable(NAMESPACES.get(domainEvent.getClass()))
             .orElseThrow(AppIntegrationException::new);
     headers.put("namespace", namespace.getName());
-
 
     return MessageBuilder.createMessage("", new MessageHeaders(headers));
   }

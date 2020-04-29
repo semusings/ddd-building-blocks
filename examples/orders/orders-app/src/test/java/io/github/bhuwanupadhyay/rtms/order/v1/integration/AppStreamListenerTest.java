@@ -1,9 +1,10 @@
-package io.github.bhuwanupadhyay.rtms.order.integration;
+package io.github.bhuwanupadhyay.rtms.order.v1.integration;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.then;
 
-import io.github.bhuwanupadhyay.rtms.order.service.AppService;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppStreamListener;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppService;
 import io.github.bhuwanupadhyay.rtms.v1.ProductsReserved;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

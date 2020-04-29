@@ -1,4 +1,4 @@
-package io.github.bhuwanupadhyay.rtms.order.integration;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @EnableBinding(Streams.class)
-public class AppDomainEventPublisher implements DomainEventPublisher {
+class AppDomainEventPublisher implements DomainEventPublisher {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
   private final Streams streams;
   private final ApplicationEventPublisher events;
 
-  public AppDomainEventPublisher(Streams streams, ApplicationEventPublisher events) {
+  AppDomainEventPublisher(Streams streams, ApplicationEventPublisher events) {
     this.streams = streams;
     this.events = events;
   }

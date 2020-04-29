@@ -1,30 +1,28 @@
-package io.github.bhuwanupadhyay.rtms.order;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
-import io.github.bhuwanupadhyay.rtms.order.exception.AppWebException;
-import io.github.bhuwanupadhyay.rtms.order.repository.OrderQueryRepository;
-import io.github.bhuwanupadhyay.rtms.order.service.AppService;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrdersApi;
-import java.util.Optional;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @RestController
-public class OrderV1Api implements OrdersApi {
+class WebOrderApi implements OrdersApi {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   private final AppService appService;
   private final OrderQueryRepository queryRepository;
 
-  public OrderV1Api(AppService appService, OrderQueryRepository queryRepository) {
+  WebOrderApi(AppService appService, OrderQueryRepository queryRepository) {
     this.appService = appService;
     this.queryRepository = queryRepository;
   }

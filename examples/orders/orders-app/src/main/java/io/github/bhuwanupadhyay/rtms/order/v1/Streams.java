@@ -1,11 +1,11 @@
-package io.github.bhuwanupadhyay.rtms.order.integration;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface Streams {
+interface Streams {
 
   String IN = "rtmsOrdersIn";
   String OUT = "rtmsOrdersOut";

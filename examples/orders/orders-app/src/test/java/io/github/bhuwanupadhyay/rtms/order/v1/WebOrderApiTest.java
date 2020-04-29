@@ -1,4 +1,4 @@
-package io.github.bhuwanupadhyay.rtms.order;
+package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +15,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(initializers = {OrderV1ApiTest.Initializer.class})
+@ContextConfiguration(initializers = {WebOrderApiTest.Initializer.class})
 @Testcontainers
-class OrderV1ApiTest {
+class WebOrderApiTest {
 
   @Container
   private static final PostgreSQLContainer SQL_CONTAINER =

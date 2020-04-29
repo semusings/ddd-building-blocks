@@ -1,4 +1,4 @@
-package io.github.bhuwanupadhyay.rtms.order.domain;
+package io.github.bhuwanupadhyay.rtms.order.v1.domain;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

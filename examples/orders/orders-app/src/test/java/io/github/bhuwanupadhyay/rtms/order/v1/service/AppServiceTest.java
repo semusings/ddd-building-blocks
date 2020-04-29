@@ -1,11 +1,12 @@
-package io.github.bhuwanupadhyay.rtms.order.service;
+package io.github.bhuwanupadhyay.rtms.order.v1.service;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import io.github.bhuwanupadhyay.rtms.order.exception.AppDataException;
-import io.github.bhuwanupadhyay.rtms.order.repository.OrderDomainRepository;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppDataException;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppService;
+import io.github.bhuwanupadhyay.rtms.order.v1.OrderDomainRepository;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
