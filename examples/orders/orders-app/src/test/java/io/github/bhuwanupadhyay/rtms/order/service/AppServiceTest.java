@@ -1,9 +1,12 @@
-package io.github.bhuwanupadhyay.rtms.order.stream;
+package io.github.bhuwanupadhyay.rtms.order.service;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
 
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import io.github.bhuwanupadhyay.rtms.order.repository.AppDataException;
+import io.github.bhuwanupadhyay.rtms.order.exception.AppDataException;
 import io.github.bhuwanupadhyay.rtms.order.repository.OrderDomainRepository;
-import io.github.bhuwanupadhyay.rtms.v1.ProductsReserved;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,21 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-
 @ExtendWith(MockitoExtension.class)
-class AppStreamListenerTest {
+class AppServiceTest {
 
-  private AppStreamListener listener;
+  private AppService appService;
 
   @Mock private OrderDomainRepository domainRepository;
 
   @BeforeEach
   void setUp() {
-    this.listener = new AppStreamListener(domainRepository);
+    this.appService = new AppService(domainRepository);
   }
 
   @Test
@@ -35,7 +33,6 @@ class AppStreamListenerTest {
     given(domainRepository.findOne(eq(new OrderId(alienOrderId)))).willReturn(Optional.empty());
 
     Assertions.assertThrows(
-        AppDataException.class,
-        () -> this.listener.on(ProductsReserved.newBuilder().setOrderId(alienOrderId).build()));
+        AppDataException.class, () -> this.appService.submitPayment(alienOrderId));
   }
 }

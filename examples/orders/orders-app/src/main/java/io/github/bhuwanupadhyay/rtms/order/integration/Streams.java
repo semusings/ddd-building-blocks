@@ -1,4 +1,4 @@
-package io.github.bhuwanupadhyay.rtms.order.stream;
+package io.github.bhuwanupadhyay.rtms.order.integration;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -7,12 +7,12 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface Streams {
 
-  String IN = "rtmsIn";
-  String OUT = "rtmsOut";
+  String IN = "rtmsOrdersIn";
+  String OUT = "rtmsOrdersOut";
 
   @Input(IN)
-  SubscribableChannel lgInput();
+  SubscribableChannel rtmsIn();
 
   @Output(OUT)
-  MessageChannel lgOutputNotifications();
+  MessageChannel rtmsOut();
 }

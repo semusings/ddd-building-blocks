@@ -1,15 +1,17 @@
 spring:
+  application:
+    name: orders
   cloud:
     stream:
       rabbit:
         bindings:
-          input:
+          rtmsOrdersIn:
             consumer:
               autoBindDlq: true
       bindings:
-        output:
+        rtmsOrdersOut:
           contentType: 'application/*+avro'
           group: rtms
-        input:
-          destination: input
+        rtmsOrdersIn:
+          destination: rtmsOrdersIn
           group: rtms

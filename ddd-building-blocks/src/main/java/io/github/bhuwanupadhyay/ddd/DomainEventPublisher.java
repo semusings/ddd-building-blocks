@@ -4,6 +4,6 @@ package io.github.bhuwanupadhyay.ddd;
 @FunctionalInterface
 public interface DomainEventPublisher {
 
-  void publish(DomainEvent domainEvents);
+  void publish(DomainEvent domainEvent);
 }
 // end::code[]
