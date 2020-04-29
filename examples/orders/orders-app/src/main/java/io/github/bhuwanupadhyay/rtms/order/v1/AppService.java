@@ -3,9 +3,11 @@ package io.github.bhuwanupadhyay.rtms.order.v1;
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
-import java.util.UUID;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 class AppService {
@@ -22,7 +24,14 @@ class AppService {
 
     LOG.atInfo().log("Submitting payment for order %s", orderId);
 
-    Order order = domainRepository.findOne(new OrderId(orderId)).orElseThrow(AppDataException::new);
+    Order order =
+        domainRepository
+            .findOne(new OrderId(orderId))
+            .orElseThrow(
+                () ->
+                    new EntityNotFound(
+                        "Order.By.Id.NotFound",
+                        String.format("Order by id %s not found.", orderId)));
 
     order.createPayment();
 

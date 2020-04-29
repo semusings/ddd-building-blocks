@@ -1,15 +1,17 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
-import static org.mockito.BDDMockito.given;
-
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import java.util.Optional;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class AppServiceTest {
@@ -30,6 +32,6 @@ class AppServiceTest {
     given(domainRepository.findOne(new OrderId(alienOrderId))).willReturn(Optional.empty());
 
     Assertions.assertThrows(
-        AppDataException.class, () -> this.appService.submitPayment(alienOrderId));
+        EntityNotFound.class, () -> this.appService.submitPayment(alienOrderId));
   }
 }
