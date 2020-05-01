@@ -17,8 +17,7 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
   public abstract Optional<T> findOne(ID id);
 
   public T save(T entity) {
-    DomainAsserts.raiseIfNull(
-        entity, DomainError.create(objectName() + ".entity", ENTITY_IS_REQUIRED));
+    DomainAsserts.raiseIfNull(entity, DomainError.create(this, "EntityIsRequired"));
     T persisted = this.persist(entity);
     entity.getDomainEvents().forEach(publisher::publish);
     entity.clearDomainEvents();
@@ -26,9 +25,5 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
   }
 
   protected abstract T persist(T entity);
-
-  public String objectName() {
-    return getClass().getName();
-  }
 }
 // end::code[]

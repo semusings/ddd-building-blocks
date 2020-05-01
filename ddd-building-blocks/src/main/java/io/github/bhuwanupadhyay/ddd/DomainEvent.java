@@ -15,8 +15,7 @@ public abstract class DomainEvent {
 
   public DomainEvent(DomainEventType domainEventType) {
     DomainAsserts.raiseIfNull(
-        domainEventType,
-        DomainError.create(objectName() + ".domainEventType", "Domain event type is required."));
+        domainEventType, DomainError.create(this, "DomainEventTypeIsRequired"));
     this.domainEventType = domainEventType.name();
   }
 
@@ -40,10 +39,6 @@ public abstract class DomainEvent {
 
   private String getDomainEventType() {
     return domainEventType;
-  }
-
-  private String objectName() {
-    return getClass().getName();
   }
 
   public enum DomainEventType {

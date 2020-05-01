@@ -7,33 +7,60 @@ import java.util.function.Supplier;
 
 public final class DomainError extends ValueObject {
 
-  public static final String DOMAIN_ERROR_CODE_SHOULD_NOT_BE_BLANK =
-      "Domain error code should not be blank.";
-
-  public static final String DOMAIN_ERROR_MESSAGE_SHOULD_NOT_BE_BLANK =
-      "Domain error message should not be blank.";
-
+  private static final String ENTITY = "Entity";
+  private static final String DOMAIN_EVENT = "DomainEvent";
+  private static final String VALUE_OBJECT = "ValueObject";
+  private static final String DOMAIN_REPOSITORY = "DomainRepository";
+  private static final String AGGREGATE_ROOT = "AggregateRoot";
+  private static final String DOMAIN_SERVICE = "DomainService";
   private final String errorCode;
 
   private final String errorMessage;
 
-  public DomainError(String errorCode, String errorMessage) {
+  private DomainError(String errorCode, String errorMessage) {
 
     DomainAsserts.begin()
-        .raiseIfBlank(
-            errorCode,
-            create(getObjectName() + ".errorCode", DOMAIN_ERROR_CODE_SHOULD_NOT_BE_BLANK))
-        .raiseIfBlank(
-            errorMessage,
-            create(getObjectName() + ".errorMessage", DOMAIN_ERROR_MESSAGE_SHOULD_NOT_BE_BLANK))
-        .ifHasErrorsThrow();
+        .raiseIfBlank(errorCode, create(this, "ErrorCodeIsRequired"))
+        .raiseIfBlank(errorMessage, create(this, "ErrorMessageIsRequired"))
+        .endAssertions();
 
     this.errorCode = errorCode;
     this.errorMessage = errorMessage;
   }
 
-  public static Supplier<DomainError> create(final String errorCode, final String errorMessage) {
-    return () -> new DomainError(errorCode, errorMessage);
+  public static <T extends DomainEvent> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, DOMAIN_EVENT, code);
+  }
+
+  public static <T extends Entity<?>> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, ENTITY, code);
+  }
+
+  public static <T extends ValueObject> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, VALUE_OBJECT, code);
+  }
+
+  public static <T extends DomainRepository<?, ?>> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, DOMAIN_REPOSITORY, code);
+  }
+
+  public static <T extends AggregateRoot<?>> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, AGGREGATE_ROOT, code);
+  }
+
+  public static <T extends DomainService> Supplier<DomainError> create(
+      final T type, final String code) {
+    return () -> createError(type, DOMAIN_SERVICE, code);
+  }
+
+  private static DomainError createError(Object o, String source, String code) {
+    final String errorCode = o.getClass().getName() + "." + code;
+    return new DomainError(errorCode, "Domain violation on " + source + " [ " + errorCode + " ]");
   }
 
   @Override

@@ -17,6 +17,14 @@
 			<artifactId>ddd-building-blocks</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.github.bhuwanupadhyay</groupId>
+			<artifactId>ddd-building-blocks</artifactId>
+			<classifier>tests</classifier>
+			<version>1.0.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 

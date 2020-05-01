@@ -7,13 +7,12 @@ import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrdersApi;
+import java.util.Optional;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @RestController
 class WebOrderApi implements OrdersApi {
@@ -65,8 +64,9 @@ class WebOrderApi implements OrdersApi {
     return new OrderResource()
         .id(order.getId().getReference())
         .contactPhone(order.getContactPhone())
-        .customerId(order.getCustomerId())
-        .productId(order.getProductId())
+        .quantity(order.getQuantity())
+        .customerId(order.getCustomer())
+        .productId(order.getProduct())
         .deliveryAddress(order.getDeliveryAddress());
   }
 }

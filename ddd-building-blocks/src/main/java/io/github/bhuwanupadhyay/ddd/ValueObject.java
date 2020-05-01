@@ -8,9 +8,5 @@ public abstract class ValueObject {
 
   @Override
   public abstract boolean equals(Object o);
-
-  public String getObjectName() {
-    return this.getClass().getName();
-  }
 }
 // end::code[]

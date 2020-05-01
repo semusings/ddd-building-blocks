@@ -3,16 +3,16 @@ package io.github.bhuwanupadhyay.rtms.order.domain;
 import io.github.bhuwanupadhyay.ddd.DomainAsserts;
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.ValueObject;
+
 import java.util.Objects;
 
 public final class OrderId extends ValueObject {
 
+  public static final String REFERENCE_IS_REQUIRED = "ReferenceIsRequired";
   private final String reference;
 
   public OrderId(String reference) {
-    DomainAsserts.raiseIfBlank(
-        reference,
-        DomainError.create(getObjectName() + ".reference", "OrderId reference is required."));
+    DomainAsserts.raiseIfBlank(reference, DomainError.create(this, REFERENCE_IS_REQUIRED));
     this.reference = reference;
   }
 

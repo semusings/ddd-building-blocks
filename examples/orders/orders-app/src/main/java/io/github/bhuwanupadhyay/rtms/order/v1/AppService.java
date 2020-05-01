@@ -1,8 +1,7 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
-import io.github.bhuwanupadhyay.rtms.order.domain.Order;
-import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
+import io.github.bhuwanupadhyay.rtms.order.domain.*;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
 import org.springframework.stereotype.Service;
@@ -45,7 +44,11 @@ class AppService {
 
     Order order = new Order(orderId);
 
-    order.creatOrder(createOrder.getProductId(), createOrder.getCustomerId(), 1);
+    Quantity quantity = new Quantity(createOrder.getQuantity());
+    Customer customer = new Customer(createOrder.getCustomerId());
+    Product product = new Product(createOrder.getProductId());
+
+    order.creatOrder(product, customer, quantity);
 
     Order savedOrder = domainRepository.save(order);
 

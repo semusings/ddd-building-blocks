@@ -5,14 +5,12 @@ import java.util.Objects;
 
 public abstract class Entity<ID extends ValueObject> {
 
-  public static final String ENTITY_ID_IS_REQUIRED = "Entity Id is required.";
-
+  public static final String ENTITY_ID_IS_REQUIRED = "EntityIdIsRequired";
   private final ID id;
 
   public Entity(ID id) {
 
-    DomainAsserts.raiseIfNull(
-        id, DomainError.create(getObjectName() + ".id", ENTITY_ID_IS_REQUIRED));
+    DomainAsserts.raiseIfNull(id, DomainError.create(this, ENTITY_ID_IS_REQUIRED));
 
     this.id = id;
   }
@@ -32,10 +30,6 @@ public abstract class Entity<ID extends ValueObject> {
   @Override
   public int hashCode() {
     return Objects.hash(this.id);
-  }
-
-  public String getObjectName() {
-    return this.getClass().getName();
   }
 }
 // end::code[]
