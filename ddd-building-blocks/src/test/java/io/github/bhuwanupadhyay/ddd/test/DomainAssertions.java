@@ -2,12 +2,11 @@ package io.github.bhuwanupadhyay.ddd.test;
 
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.DomainValidationException;
-import org.assertj.core.api.AbstractAssert;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.assertj.core.api.AbstractAssert;
 
 public final class DomainAssertions {
 
@@ -58,7 +57,9 @@ public final class DomainAssertions {
           errorCodes().filter(Objects::nonNull).filter(error -> error.endsWith(errorCode)).count();
 
       if (count != 1) {
-        failWithMessage("%s exists <%d> times on errors but expected <1> times.%s", errorCode, count, prettyCodeErrors());
+        failWithMessage(
+            "%s exists <%d> times on errors but expected <1> times.%s",
+            errorCode, count, prettyCodeErrors());
       }
       return this;
     }

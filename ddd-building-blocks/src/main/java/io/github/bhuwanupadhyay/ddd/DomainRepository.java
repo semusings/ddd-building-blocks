@@ -16,16 +16,13 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
 
   public abstract Optional<T> findOne(ID id);
 
-  public T save(T entity) {
-    DomainAsserts.begin(entity)
-        .notNull(DomainError.create(this, "EntityIsRequired"))
-        .end();
-    T persisted = this.persist(entity);
+  public void save(T entity) {
+    DomainAsserts.begin(entity).notNull(DomainError.create(this, "EntityIsRequired")).end();
+    this.persist(entity);
     entity.getDomainEvents().forEach(publisher::publish);
     entity.clearDomainEvents();
-    return persisted;
   }
 
-  protected abstract T persist(T entity);
+  protected abstract void persist(T entity);
 }
 // end::code[]

@@ -1,20 +1,19 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
+import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
+
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.ValueObject;
-
 import java.util.Objects;
-
-import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
 
 public final class OrderId extends ValueObject {
 
-  public static final String REFERENCE_IS_REQUIRED = "ReferenceIsRequired";
-  private final String reference;
+  public static final String ORDER_ID_IS_REQUIRED = "OrderIdIsRequired";
+  private final String id;
 
-  public OrderId(String reference) {
-    begin(reference).notNull(DomainError.create(this, REFERENCE_IS_REQUIRED)).end();
-    this.reference = reference;
+  public OrderId(String id) {
+    begin(id).notNull(DomainError.create(this, ORDER_ID_IS_REQUIRED)).end();
+    this.id = id;
   }
 
   @Override
@@ -22,20 +21,20 @@ public final class OrderId extends ValueObject {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     OrderId orderId = (OrderId) o;
-    return Objects.equals(reference, orderId.reference);
+    return Objects.equals(id, orderId.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(reference);
+    return Objects.hash(id);
   }
 
-  public String getReference() {
-    return this.reference;
+  public String getId() {
+    return this.id;
   }
 
   @Override
   public String toString() {
-    return "OrderId{" + "reference='" + reference + '\'' + '}';
+    return "OrderId{" + "reference='" + id + '\'' + '}';
   }
 }

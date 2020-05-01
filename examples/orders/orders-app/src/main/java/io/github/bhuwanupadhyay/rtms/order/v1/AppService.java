@@ -26,21 +26,17 @@ class AppService {
     Order order =
         domainRepository
             .findOne(new OrderId(orderId))
-            .orElseThrow(
-                () ->
-                    new EntityNotFound(
-                        "Order.By.Id.NotFound",
-                        String.format("Order by id %s not found.", orderId)));
+            .orElseThrow(() -> new EntityNotFound("Order.By.Id.NotFound"));
 
     order.createPayment();
 
-    LOG.atInfo().log("Created payment request for an order %s.", order.getId().getReference());
+    LOG.atInfo().log("Created payment request for an order %s.", order.getId().getId());
   }
 
-  Order placeOrder(CreateOrder createOrder) {
+  OrderId placeOrder(CreateOrder createOrder) {
     OrderId orderId = new OrderId(UUID.randomUUID().toString());
 
-    LOG.atInfo().log("Placing new order %s", orderId.getReference());
+    LOG.atInfo().log("Placing new order %s", orderId.getId());
 
     Order order = new Order(orderId);
 
@@ -50,10 +46,10 @@ class AppService {
 
     order.placeOrder(product, customer, quantity);
 
-    Order savedOrder = domainRepository.save(order);
+    domainRepository.save(order);
 
-    LOG.atInfo().log("Created new order %s", savedOrder.getId().getReference());
+    LOG.atInfo().log("Created new order %s", orderId.getId());
 
-    return savedOrder;
+    return orderId;
   }
 }

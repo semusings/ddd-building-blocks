@@ -1,18 +1,18 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
-import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.BadRequest;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrdersApi;
-import java.util.Optional;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @RestController
 class WebOrderApi implements OrdersApi {
@@ -45,7 +45,7 @@ class WebOrderApi implements OrdersApi {
     return createOrder
         .doFirst(() -> LOG.atInfo().log("Creating new order."))
         .map(appService::placeOrder)
-        .map(order -> ResponseEntity.ok(toOrderResource(order)))
+        .map(orderId -> ResponseEntity.ok(queryRepository.findByOrderId(orderId.getId())))
         .doOnError(throwable -> LOG.atSevere().log("Unable to create new order."))
         .doOnSuccess(
             response ->
@@ -54,19 +54,6 @@ class WebOrderApi implements OrdersApi {
                     Optional.ofNullable(response)
                         .map(HttpEntity::getBody)
                         .map(OrderResource::getId)
-                        .orElseThrow(
-                            () ->
-                                new BadRequest(
-                                    "CreateOrder.Unsuccessful", "New order does not have id."))));
-  }
-
-  private OrderResource toOrderResource(Order order) {
-    return new OrderResource()
-        .id(order.getId().getReference())
-        .contactPhone(order.getContactPhone())
-        .quantity(order.getQuantity())
-        .customerId(order.getCustomer())
-        .productId(order.getProduct())
-        .deliveryAddress(order.getDeliveryAddress());
+                        .orElseThrow(() -> new BadRequest("CreateOrder.Unsuccessful"))));
   }
 }

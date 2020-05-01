@@ -4,27 +4,37 @@ import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 import io.github.bhuwanupadhyay.ddd.DomainRepository;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
-import io.github.bhuwanupadhyay.rtms.order.v1.persistance.SpringDataOrderRepository;
-import java.util.Optional;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppException.DataAccessException;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 class OrderDomainRepository extends DomainRepository<Order, OrderId> {
 
-  private final SpringDataOrderRepository repository;
+  private final SpringDataOrderRepository dataRepository;
+  private final OrderDataMapper dataMapper;
 
-  OrderDomainRepository(DomainEventPublisher publisher, SpringDataOrderRepository repository) {
+  OrderDomainRepository(
+      DomainEventPublisher publisher,
+      SpringDataOrderRepository dataRepository,
+      OrderDataMapper dataMapper) {
     super(publisher);
-    this.repository = repository;
+    this.dataRepository = dataRepository;
+    this.dataMapper = dataMapper;
   }
 
   @Override
   public Optional<Order> findOne(OrderId orderId) {
-    return repository.findById();
+    return dataRepository.findById(orderId.getId()).map(dataMapper::toOrder);
   }
 
   @Override
-  protected Order persist(Order entity) {
-    return null;
+  protected void persist(Order entity) {
+    try {
+      dataRepository.save(dataMapper.toOrderData(entity));
+    } catch (Exception e) {
+      throw new DataAccessException("OrderEntityNotSaved", e);
+    }
   }
 }

@@ -2,10 +2,10 @@ package io.github.bhuwanupadhyay.ddd;
 
 // tag::code[]
 
+import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
+
 import java.util.Objects;
 import java.util.UUID;
-
-import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
 
 public abstract class DomainEvent {
 

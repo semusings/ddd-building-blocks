@@ -24,20 +24,30 @@ abstract class AppException extends RuntimeException {
   }
 
   static class BadRequest extends AppException {
-    BadRequest(String errorCode, String errorMessage) {
-      super(errorCode, errorMessage);
+    BadRequest(String errorCode) {
+      super(errorCode, "");
     }
   }
 
   static class EntityNotFound extends AppException {
-    EntityNotFound(String errorCode, String errorMessage) {
-      super(errorCode, errorMessage);
+    EntityNotFound(String errorCode) {
+      super(errorCode, "");
+    }
+  }
+
+  static class DataAccessException extends AppException {
+    DataAccessException(String errorCode, Throwable throwable) {
+      super(errorCode, "", throwable);
+    }
+
+    DataAccessException(String errorCode) {
+      super(errorCode, "");
     }
   }
 
   static class MessageStreamException extends AppException {
-    MessageStreamException(String errorCode, String errorMessage) {
-      super(errorCode, errorMessage);
+    MessageStreamException(String errorCode) {
+      super(errorCode, "");
     }
   }
 }

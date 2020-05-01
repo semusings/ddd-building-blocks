@@ -4,6 +4,7 @@ import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 import io.github.bhuwanupadhyay.rtms.order.domain.PaymentRequested;
+import io.github.bhuwanupadhyay.rtms.order.v1.AppException.MessageStreamException;
 import io.github.bhuwanupadhyay.rtms.v1.SubmitPayment;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,13 +58,7 @@ class AppDomainEventPublisher implements DomainEventPublisher {
 
       Class<? extends SpecificRecord> namespace =
           Optional.ofNullable(NAMESPACES.get(domainEvent.getClass()))
-              .orElseThrow(
-                  () ->
-                      new AppException.MessageStreamException(
-                          "DomainEvent.AvroSchema.NotDefined",
-                          String.format(
-                              "Avro schema not defined for domain event %s",
-                              domainEvent.getEventClassName())));
+              .orElseThrow(() -> new MessageStreamException("DomainEvent.AvroSchema.NotDefined"));
       headers.put("namespace", namespace.getName());
 
       return MessageBuilder.createMessage("", new MessageHeaders(headers));

@@ -3,7 +3,6 @@ package io.github.bhuwanupadhyay.rtms.order.domain;
 import io.github.bhuwanupadhyay.ddd.DomainAsserts;
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.ValueObject;
-
 import java.util.Objects;
 
 public final class Quantity extends ValueObject {

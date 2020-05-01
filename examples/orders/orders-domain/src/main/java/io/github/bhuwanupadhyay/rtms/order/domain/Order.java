@@ -3,7 +3,6 @@ package io.github.bhuwanupadhyay.rtms.order.domain;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import io.github.bhuwanupadhyay.ddd.DomainAsserts;
 import io.github.bhuwanupadhyay.ddd.DomainError;
-
 import java.util.Optional;
 
 public final class Order extends AggregateRoot<OrderId> implements OrderParams {
