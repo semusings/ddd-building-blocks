@@ -13,12 +13,12 @@ import java.util.Optional;
 class OrderDomainRepository extends DomainRepository<Order, OrderId> {
 
   private final SpringDataOrderRepository dataRepository;
-  private final OrderDataMapper dataMapper;
+  private final OrderDbMapper dataMapper;
 
   OrderDomainRepository(
       DomainEventPublisher publisher,
       SpringDataOrderRepository dataRepository,
-      OrderDataMapper dataMapper) {
+      OrderDbMapper dataMapper) {
     super(publisher);
     this.dataRepository = dataRepository;
     this.dataMapper = dataMapper;
@@ -34,7 +34,7 @@ class OrderDomainRepository extends DomainRepository<Order, OrderId> {
     try {
       dataRepository.save(dataMapper.toOrderData(entity));
     } catch (Exception e) {
-      throw new DataAccessException("OrderEntityNotSaved", e);
+      throw new DataAccessException("ExceptionOccurredWhileSavingOrder", e);
     }
   }
 }

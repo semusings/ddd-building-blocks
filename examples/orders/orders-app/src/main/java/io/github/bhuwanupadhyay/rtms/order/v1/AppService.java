@@ -4,20 +4,18 @@ import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.*;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 class AppService {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   private final OrderDomainRepository domainRepository;
-
-  AppService(OrderDomainRepository domainRepository) {
-    this.domainRepository = domainRepository;
-  }
 
   void submitPayment(String orderId) {
 
