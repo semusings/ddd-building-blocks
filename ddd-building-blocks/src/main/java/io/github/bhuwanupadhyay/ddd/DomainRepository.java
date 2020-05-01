@@ -17,7 +17,9 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
   public abstract Optional<T> findOne(ID id);
 
   public T save(T entity) {
-    DomainAsserts.raiseIfNull(entity, DomainError.create(this, "EntityIsRequired"));
+    DomainAsserts.begin(entity)
+        .notNull(DomainError.create(this, "EntityIsRequired"))
+        .end();
     T persisted = this.persist(entity);
     entity.getDomainEvents().forEach(publisher::publish);
     entity.clearDomainEvents();

@@ -6,15 +6,14 @@ import org.assertj.core.api.AbstractAssert;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class DomainAssertions {
 
-  public static DomainValidationAssert assertThat(Supplier<?> callback) {
+  public static DomainValidationAssert assertThat(Runnable callback) {
     try {
-      callback.get();
+      callback.run();
       return new DomainValidationAssert(null);
     } catch (DomainValidationException e) {
       return new DomainValidationAssert(e);
@@ -29,7 +28,11 @@ public final class DomainAssertions {
     }
 
     private DomainValidationAssert hasErrors() {
-      this.isNotNull();
+
+      if (this.actual == null) {
+        failWithMessage("Domain errors does not occurred.");
+      }
+
       List<DomainError> domainErrors = this.actual.getDomainErrors();
 
       if (domainErrors.isEmpty()) {
@@ -39,24 +42,23 @@ public final class DomainAssertions {
     }
 
     public DomainValidationAssert hasNoErrors() {
-      this.isNull();
+      if (this.actual != null) {
+        failWithMessage(
+            "Found total <%d> domain errors but expected zero errors.%s",
+            errorCodes().count(), prettyCodeErrors());
+      }
+
       return this;
     }
 
     public DomainValidationAssert hasErrorCode(String errorCode) {
-      return this.hasErrorCode(errorCode, 1);
-    }
-
-    private DomainValidationAssert hasErrorCode(String errorCode, int times) {
       this.hasErrors();
 
       long count =
           errorCodes().filter(Objects::nonNull).filter(error -> error.endsWith(errorCode)).count();
 
-      if (count != times) {
-        failWithMessage(
-            "%s exists on errors <%d> times but expected <%d> times. ACTUAL_ERRORS: [%s]",
-            errorCode, count, times, errorCodesAsString());
+      if (count != 1) {
+        failWithMessage("%s exists <%d> times on errors but expected <1> times.%s", errorCode, count, prettyCodeErrors());
       }
       return this;
     }
@@ -65,8 +67,10 @@ public final class DomainAssertions {
       return this.actual.getDomainErrors().stream().map(DomainError::getErrorCode);
     }
 
-    private String errorCodesAsString() {
-      return errorCodes().collect(Collectors.joining(","));
+    private String prettyCodeErrors() {
+      return String.format(
+          "\n--------\nACTUAL_ERRORS: [\n%s\n]\n--------\n",
+          errorCodes().collect(Collectors.joining(",\n")));
     }
   }
 }

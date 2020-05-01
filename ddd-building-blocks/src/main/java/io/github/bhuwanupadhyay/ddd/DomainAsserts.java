@@ -12,38 +12,39 @@ public final class DomainAsserts {
 
   private DomainAsserts() {}
 
-  public static <T> DomainAssert begin(T value) {
-    return new DomainAssert(value);
+  public static <T> DomainAssert<T> begin(T value) {
+    return new DomainAssert<>(value);
   }
 
-  public static <T> void raiseIfNull(T value, Supplier<DomainError> error) {
-    begin(value).notNull(error).endAssertions();
-  }
-
-  public static void raiseIfBlank(String value, Supplier<DomainError> error) {
-    begin(value).notBlank(error).endAssertions();
+  private static <T> DomainAssert<T> begin(T value, List<DomainError> errors) {
+    return new DomainAssert<>(value, errors);
   }
 
   public static class DomainAssert<T> {
     private final List<DomainError> domainErrors = new ArrayList<>();
 
-    private final T acutal;
+    private final T actual;
 
     private DomainAssert(T value) {
-      this.acutal = value;
+      this(value, new ArrayList<>());
     }
 
-    public <T> DomainAssert notNull(Supplier<DomainError> error) {
-      if (Objects.isNull(this.acutal)) {
+    private DomainAssert(T value, List<DomainError> domainErrors) {
+      this.actual = value;
+      this.domainErrors.addAll(domainErrors);
+    }
+
+    public DomainAssert<T> notNull(Supplier<DomainError> error) {
+      if (Objects.isNull(this.actual)) {
         this.domainErrors.add(error.get());
       }
       return this;
     }
 
-    public DomainAssert notBlank(Supplier<DomainError> error) {
+    public DomainAssert<T> notBlank(Supplier<DomainError> error) {
       notNull(error);
 
-      String s = (String) this.acutal;
+      String s = (String) this.actual;
 
       if (s.isBlank()) {
         this.domainErrors.add(error.get());
@@ -51,20 +52,24 @@ public final class DomainAsserts {
       return this;
     }
 
-    public <T> DomainAssert raiseIf(Predicate<T> predicate, Supplier<DomainError> error) {
-      notNull(value, DomainError.create(value, "ValueForDomainAssertPredicateIsRequired"));
+    public DomainAssert<T> raiseIf(Predicate<T> predicate, Supplier<DomainError> error) {
+      notNull(error);
 
-      if (predicate.test(value)) {
+      if (predicate.test(this.actual)) {
         this.domainErrors.add(error.get());
       }
       return this;
     }
 
-    public void endAssertions() {
+    public void end() {
       if (this.domainErrors.isEmpty()) {
         return;
       }
       throw new DomainValidationException(this.domainErrors);
+    }
+
+    public <S> DomainAssert<S> switchOn(S value) {
+      return DomainAsserts.begin(value, this.domainErrors);
     }
   }
 }

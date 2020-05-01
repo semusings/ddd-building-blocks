@@ -48,7 +48,7 @@ class AppService {
     Customer customer = new Customer(createOrder.getCustomerId());
     Product product = new Product(createOrder.getProductId());
 
-    order.creatOrder(product, customer, quantity);
+    order.placeOrder(product, customer, quantity);
 
     Order savedOrder = domainRepository.save(order);
 

@@ -12,10 +12,9 @@ public final class Quantity extends ValueObject {
 
   public Quantity(Integer value) {
 
-  	DomainAsserts.begin()
-        .raiseIfNull(value, DomainError.create(this, "QuantityValueIsRequired"))
-        .raiseIf(() -> value < 1,  DomainError.create(this, "QuantityValueShouldBePositive"))
-        .endAssertions();
+    DomainAsserts.begin(value)
+        .raiseIf(this::isLessThanOne, DomainError.create(this, "QuantityValueShouldBePositive"))
+        .end();
 
     this.value = value;
   }
@@ -35,5 +34,9 @@ public final class Quantity extends ValueObject {
 
   public Integer getValue() {
     return value;
+  }
+
+  private boolean isLessThanOne(Integer quantity) {
+    return quantity < 1;
   }
 }

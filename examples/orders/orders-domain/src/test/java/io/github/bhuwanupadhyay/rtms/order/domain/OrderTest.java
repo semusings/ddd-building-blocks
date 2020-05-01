@@ -19,4 +19,14 @@ class OrderTest {
   void givenNotEmptyOrderId_thenOrderShouldCreated() {
     assertThat(() -> new Order(new OrderId("O#0001"))).hasNoErrors();
   }
+
+  @Test
+  void product_Customer_Quantity_AreRequired_toPlaceOrder() {
+    final Order order = new Order(new OrderId("O#0001"));
+
+    assertThat(() -> order.placeOrder(null, null, null))
+        .hasErrorCode("ProductIsRequired")
+        .hasErrorCode("CustomerIsRequired")
+        .hasErrorCode("QuantityIsRequired");
+  }
 }

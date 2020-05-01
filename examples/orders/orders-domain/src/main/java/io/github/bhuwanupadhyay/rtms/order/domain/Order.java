@@ -3,6 +3,7 @@ package io.github.bhuwanupadhyay.rtms.order.domain;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import io.github.bhuwanupadhyay.ddd.DomainAsserts;
 import io.github.bhuwanupadhyay.ddd.DomainError;
+
 import java.util.Optional;
 
 public final class Order extends AggregateRoot<OrderId> implements OrderParams {
@@ -17,13 +18,15 @@ public final class Order extends AggregateRoot<OrderId> implements OrderParams {
     super(id);
   }
 
-  public void creatOrder(Product product, Customer customer, Quantity quantity) {
+  public void placeOrder(Product product, Customer customer, Quantity quantity) {
 
-    DomainAsserts.begin()
-        .raiseIfNull(product, DomainError.create(this, "ProductIsRequired"))
-        .raiseIfNull(customer, DomainError.create(this, "DeliveryAddressIsRequired"))
-        .raiseIfNull(quantity, DomainError.create(this, "QuantityIsRequired"))
-        .endAssertions();
+    DomainAsserts.begin(product)
+        .notNull(DomainError.create(this, "ProductIsRequired"))
+        .switchOn(customer)
+        .notNull(DomainError.create(this, "CustomerIsRequired"))
+        .switchOn(quantity)
+        .notNull(DomainError.create(this, "QuantityIsRequired"))
+        .end();
 
     this.product = product;
     this.customer = customer;

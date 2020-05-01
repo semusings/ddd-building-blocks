@@ -19,10 +19,11 @@ public final class DomainError extends ValueObject {
 
   private DomainError(String errorCode, String errorMessage) {
 
-    DomainAsserts.begin()
-        .raiseIfBlank(errorCode, create(this, "ErrorCodeIsRequired"))
-        .raiseIfBlank(errorMessage, create(this, "ErrorMessageIsRequired"))
-        .endAssertions();
+    DomainAsserts.begin(errorCode)
+        .notBlank(create(this, "ErrorCodeIsRequired"))
+        .switchOn(errorMessage)
+        .notBlank(create(this, "ErrorMessageIsRequired"))
+        .end();
 
     this.errorCode = errorCode;
     this.errorMessage = errorMessage;

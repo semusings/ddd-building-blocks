@@ -10,7 +10,9 @@ public abstract class Entity<ID extends ValueObject> {
 
   public Entity(ID id) {
 
-    DomainAsserts.raiseIfNull(id, DomainError.create(this, ENTITY_ID_IS_REQUIRED));
+    DomainAsserts.begin(id)
+        .notNull(DomainError.create(this, ENTITY_ID_IS_REQUIRED))
+        .end();
 
     this.id = id;
   }

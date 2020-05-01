@@ -1,10 +1,11 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
-import io.github.bhuwanupadhyay.ddd.DomainAsserts;
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.ValueObject;
 
 import java.util.Objects;
+
+import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
 
 public final class OrderId extends ValueObject {
 
@@ -12,7 +13,7 @@ public final class OrderId extends ValueObject {
   private final String reference;
 
   public OrderId(String reference) {
-    DomainAsserts.raiseIfBlank(reference, DomainError.create(this, REFERENCE_IS_REQUIRED));
+    begin(reference).notNull(DomainError.create(this, REFERENCE_IS_REQUIRED)).end();
     this.reference = reference;
   }
 
