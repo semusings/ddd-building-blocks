@@ -1,11 +1,9 @@
-package io.github.bhuwanupadhyay.ddd.test;
+package io.github.bhuwanupadhyay.ddd;
 
-import io.github.bhuwanupadhyay.ddd.DomainError;
-import io.github.bhuwanupadhyay.ddd.DomainValidationException;
-import java.util.List;
-import java.util.Objects;
-
+// tag::code[]
 import org.assertj.core.api.AbstractAssert;
+
+import java.util.List;
 
 public final class DomainAssertions {
 
@@ -64,3 +62,4 @@ public final class DomainAssertions {
     }
   }
 }
+// end::code[]

@@ -17,7 +17,12 @@ public final class Order extends AggregateRoot<OrderId> implements OrderParams {
     super(id);
   }
 
-  public void placeOrder(Product product, Customer customer, Quantity quantity) {
+  public void placeOrder(
+      Product product,
+      Customer customer,
+      Quantity quantity,
+      ContactPhone contactPhone,
+      DeliveryAddress deliveryAddress) {
 
     DomainAsserts.begin(product)
         .notNull(DomainError.create(this, "ProductIsRequired"))
@@ -25,8 +30,14 @@ public final class Order extends AggregateRoot<OrderId> implements OrderParams {
         .notNull(DomainError.create(this, "CustomerIsRequired"))
         .switchOn(quantity)
         .notNull(DomainError.create(this, "QuantityIsRequired"))
+        .switchOn(contactPhone)
+        .notNull(DomainError.create(this, "ContactPhoneIsRequired"))
+        .switchOn(deliveryAddress)
+        .notNull(DomainError.create(this, "DeliveryAddressIsRequired"))
         .end();
 
+    this.contactPhone = contactPhone;
+    this.deliveryAddress = deliveryAddress;
     this.product = product;
     this.customer = customer;
     this.quantity = quantity;

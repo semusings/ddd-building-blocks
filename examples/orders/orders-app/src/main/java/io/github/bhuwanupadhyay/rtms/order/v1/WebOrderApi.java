@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 class WebOrderApi implements OrdersApi {
 
   private static final String BEGIN = "BEGIN-----";
-  private static final String END = "-----END";
+  private static final String END = "END-----";
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
   private final AppService appService;
   private final OrderQueryRepository queryRepository;
@@ -36,7 +36,7 @@ class WebOrderApi implements OrdersApi {
       Integer pageNumber,
       Integer pageSize,
       ServerWebExchange exchange) {
-    LOG.atInfo().log(BEGIN);
+    LOG.atInfo().log(BEGIN + "#getOrders");
     LOG.atInfo().log("Receive get orders http request.");
     LOG.atFinest().log("FilterJson: %s ", filterJson);
     LOG.atFinest().log("Sort: %s ", sort);
@@ -55,14 +55,14 @@ class WebOrderApi implements OrdersApi {
       LOG.atSevere().withCause(e).log("Error on get orders http request.");
       throw new BadRequest("NotAbleToGetOrders");
     } finally {
-      LOG.atInfo().log(END);
+      LOG.atInfo().log(END + "#getOrders");
     }
   }
 
   @Override
   public Mono<ResponseEntity<OrderResource>> getOrdersByOrderId(
       String orderId, ServerWebExchange exchange) {
-    LOG.atInfo().log(BEGIN);
+    LOG.atInfo().log(BEGIN + "#getOrdersByOrderId");
     LOG.atInfo().log("Receive get order by id http request.");
     LOG.atFinest().log("OrderId: %s ", orderId);
     try {
@@ -71,7 +71,7 @@ class WebOrderApi implements OrdersApi {
       LOG.atSevere().withCause(e).log("Error on get order by id http request.");
       throw new BadRequest("NotAbleToGetOrderById");
     } finally {
-      LOG.atInfo().log(END);
+      LOG.atInfo().log(END + "#getOrdersByOrderId");
     }
   }
 
@@ -81,7 +81,7 @@ class WebOrderApi implements OrdersApi {
     return createOrder
         .doFirst(
             () -> {
-              LOG.atInfo().log(BEGIN);
+              LOG.atInfo().log(BEGIN + "#postOrders");
               LOG.atInfo().log("Receive create order http request.");
             })
         .map(appService::placeOrder)
@@ -91,6 +91,6 @@ class WebOrderApi implements OrdersApi {
               LOG.atSevere().withCause(throwable).log("Error on create order http request.");
               LOG.atInfo().log(END);
             })
-        .doOnSuccess(response -> LOG.atInfo().log(END));
+        .doOnSuccess(response -> LOG.atInfo().log(END + "#postOrders"));
   }
 }

@@ -5,8 +5,6 @@ import java.util.Optional;
 
 public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends ValueObject> {
 
-  public static final String ENTITY_IS_REQUIRED = "Entity is required.";
-
   private final DomainEventPublisher publisher;
 
   protected DomainRepository(DomainEventPublisher publisher) {

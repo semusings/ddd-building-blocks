@@ -2,7 +2,7 @@ package io.github.bhuwanupadhyay.rtms.order.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import io.github.bhuwanupadhyay.ddd.test.DomainAssertions;
+import io.github.bhuwanupadhyay.ddd.DomainAssertions;
 import org.junit.jupiter.api.Test;
 
 class OrderIdTest {

@@ -1,6 +1,5 @@
 package io.github.bhuwanupadhyay.ddd;
 // tag::code[]
-
 public abstract class ValueObject {
 
   @Override

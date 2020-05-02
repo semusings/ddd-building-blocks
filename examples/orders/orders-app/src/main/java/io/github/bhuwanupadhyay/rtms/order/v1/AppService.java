@@ -43,8 +43,10 @@ class AppService {
     Quantity quantity = new Quantity(createOrder.getQuantity());
     Customer customer = new Customer(createOrder.getCustomerId());
     Product product = new Product(createOrder.getProductId());
+    ContactPhone contactPhone = new ContactPhone(createOrder.getContactPhone());
+    DeliveryAddress deliveryAddress = new DeliveryAddress(createOrder.getDeliveryAddress());
 
-    order.placeOrder(product, customer, quantity);
+    order.placeOrder(product, customer, quantity, contactPhone, deliveryAddress);
 
     domainRepository.save(order);
 
