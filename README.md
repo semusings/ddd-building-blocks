@@ -5,7 +5,7 @@ categories:
 - Microservices
 tags:
 - ddd
-image: https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/src/main/assets/layer.png
+image: https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/layer.png
 ---
 
 Domain-driven design (DDD), is an approach used to build systems that have a complex business domain.
@@ -27,7 +27,7 @@ In this article, I will take you through the best available options for building
 
 ## Domain Event
 
-![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/src/main/assets/aggregate_transaction.png)
+![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/aggregate_transaction.png)
 
 ## Service
 
@@ -37,4 +37,4 @@ In this article, I will take you through the best available options for building
 
 ## Example Scenario
 
-![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/src/main/assets/rtms.png)
+![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/rtms.png)
