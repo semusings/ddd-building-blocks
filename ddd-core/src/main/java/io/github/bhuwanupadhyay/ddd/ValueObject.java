@@ -1,7 +1,6 @@
 package io.github.bhuwanupadhyay.ddd;
 
 public abstract class ValueObject {
-
   @Override
   public abstract int hashCode();
 
