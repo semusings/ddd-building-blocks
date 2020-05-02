@@ -23,10 +23,7 @@ class AppService {
 
     LOG.atInfo().log("Preparing payment request for order an %s", orderId);
 
-    Order order =
-        domainRepository
-            .findOne(new OrderId(orderId))
-            .orElseThrow(() -> new EntityNotFound("Order.By.Id.NotFound"));
+    Order order = getOrder(orderId);
 
     order.createPayment();
 
@@ -37,10 +34,7 @@ class AppService {
 
     LOG.atInfo().log("Preparing shipping request for an order %s", orderId);
 
-    Order order =
-        domainRepository
-            .findOne(new OrderId(orderId))
-            .orElseThrow(() -> new EntityNotFound("Order.By.Id.NotFound"));
+    Order order = getOrder(orderId);
 
     order.shipProducts();
 
@@ -51,10 +45,7 @@ class AppService {
 
     LOG.atInfo().log("Preparing confirmation request for an order %s", orderId);
 
-    Order order =
-        domainRepository
-            .findOne(new OrderId(orderId))
-            .orElseThrow(() -> new EntityNotFound("Order.By.Id.NotFound"));
+    Order order = getOrder(orderId);
 
     order.confirmOrder();
 
@@ -81,5 +72,11 @@ class AppService {
     LOG.atInfo().log("Created new order %s", orderId.getId());
 
     return orderId;
+  }
+
+  private Order getOrder(String orderId) {
+    return domainRepository
+        .findOne(new OrderId(orderId))
+        .orElseThrow(() -> new EntityNotFound("OrderNotFound"));
   }
 }
