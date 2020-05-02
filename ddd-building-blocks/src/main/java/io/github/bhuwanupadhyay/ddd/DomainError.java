@@ -60,8 +60,9 @@ public final class DomainError extends ValueObject {
   }
 
   private static DomainError createError(Object o, String source, String code) {
-    final String errorCode = o.getClass().getName() + "." + code;
-    return new DomainError(errorCode, "Domain violation on " + source + " [ " + errorCode + " ]");
+    final String name = o.getClass().getName();
+    final String errorCode = name + "." + code;
+    return new DomainError(errorCode, "Domain violation on " + source + " [ " + name + " ]");
   }
 
   @Override

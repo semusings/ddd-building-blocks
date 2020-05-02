@@ -10,19 +10,19 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     primaryKeyName: rtms_order_pkey
-                  name: orderId
+                  name: order_id
                   type: VARCHAR(50)
               - column:
-                  name: productId
+                  name: product_id
                   type: VARCHAR(50)
               - column:
-                  name: customerId
+                  name: customer_id
                   type: VARCHAR(50)
               - column:
-                  name: deliveryAddress
+                  name: delivery_address
                   type: VARCHAR(1000)
               - column:
-                  name: contactPhone
+                  name: contact_phone
                   type: VARCHAR(20)
               - column:
                   name: quantity

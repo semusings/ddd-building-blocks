@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 class OrderDomainRepository extends DomainRepository<Order, OrderId> {
 
+  public static final String EMPTY = "";
+  public static final int DEFAULT_QUANTITY = 1;
   private final JdbcTemplate jdbc;
   private final OrderQueries queries;
 
@@ -36,7 +38,14 @@ class OrderDomainRepository extends DomainRepository<Order, OrderId> {
   @Override
   protected void persist(Order entity) {
     try {
-      jdbc.update(queries.getSaveOrder(), entity.getId().getId());
+      jdbc.update(
+          queries.getSaveOrder(),
+          entity.getId().getId(),
+          entity.getProductId().orElse(EMPTY),
+          entity.getCustomerId().orElse(EMPTY),
+          entity.getDeliveryAddress().orElse(EMPTY),
+          entity.getContactPhone().orElse(EMPTY),
+          entity.getQuantity().orElse(DEFAULT_QUANTITY));
     } catch (Exception e) {
       throw new DataAccessException("ExceptionOccurredWhileSavingOrder", e);
     }

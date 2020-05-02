@@ -35,7 +35,7 @@ class OrderQueryRepository {
         rs -> {
           return Optional.of(rs.next())
               .filter(Boolean::booleanValue)
-              .map(ignored -> new OrderResource())
+              .map(ignored -> toOrderResource(rs))
               .orElseThrow(() -> new EntityNotFound("OrderIdDoesNotExists"));
         });
   }
@@ -58,7 +58,7 @@ class OrderQueryRepository {
               public OrderResource mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return Optional.of(rs.next())
                     .filter(Boolean::booleanValue)
-                    .map(ignored -> new OrderResource())
+                    .map(ignored -> toOrderResource(rs))
                     .orElseGet(() -> null);
               }
             });
@@ -77,5 +77,19 @@ class OrderQueryRepository {
                 .pageNumber(pageNumber)
                 .sort(sort))
         .content(orderResources);
+  }
+
+  private OrderResource toOrderResource(ResultSet rs) {
+    try {
+      return new OrderResource()
+          .id(rs.getString("order_id"))
+          .customerId(rs.getString("customer_id"))
+          .productId(rs.getString("product_id"))
+          .contactPhone(rs.getString("contact_phone"))
+          .deliveryAddress(rs.getString("delivery_address"))
+          .quantity(rs.getInt("quantity"));
+    } catch (SQLException e) {
+      throw new AppException.DataAccessException("ExceptionOccurredWhileMappingOrderResultSet", e);
+    }
   }
 }
