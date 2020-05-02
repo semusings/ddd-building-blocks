@@ -18,16 +18,6 @@ public abstract class DomainEvent {
     this.domainEventType = domainEventType.name();
   }
 
-  public boolean isInsideContext() {
-    return Objects.equals(DomainEventType.BOTH.name(), this.getDomainEventType())
-        || Objects.equals(DomainEventType.INSIDE.name(), this.getDomainEventType());
-  }
-
-  public boolean isOutsideContext() {
-    return Objects.equals(DomainEventType.BOTH.name(), this.getDomainEventType())
-        || Objects.equals(DomainEventType.OUTSIDE.name(), this.getDomainEventType());
-  }
-
   public String getEventId() {
     return eventId;
   }
@@ -38,6 +28,16 @@ public abstract class DomainEvent {
 
   private String getDomainEventType() {
     return domainEventType;
+  }
+
+  public boolean isInsideContext() {
+    return Objects.equals(DomainEventType.BOTH.name(), this.getDomainEventType())
+        || Objects.equals(DomainEventType.INSIDE.name(), this.getDomainEventType());
+  }
+
+  public boolean isOutsideContext() {
+    return Objects.equals(DomainEventType.BOTH.name(), this.getDomainEventType())
+        || Objects.equals(DomainEventType.OUTSIDE.name(), this.getDomainEventType());
   }
 
   public enum DomainEventType {
