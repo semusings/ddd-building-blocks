@@ -1,2 +1,2 @@
 SELECT count(order_id) FROM
-rtms_order
+rtms_order where 1 = 1

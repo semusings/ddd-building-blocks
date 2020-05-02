@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,14 +40,19 @@ class OrderQueryRepository {
   public OrderPageList findAll(
       OrderResource filterResource, Integer pageSize, Integer pageNumber, String sort) {
     LOG.atInfo().log("Find all orders with page size %d, page number %d", pageSize, pageNumber);
-    final Object[] args = {};
 
-    final Long rowsCount = jdbc.queryForObject(queries.getCountOrders(), args, Long.class);
+    final OrderResourceMapper.WhereClause whereClause =
+        new OrderResourceMapper.WhereClause(filterResource);
+
+    final String countOrdersSql = queries.getCountOrders() + whereClause.getQuery();
+
+    final Long rowsCount = jdbc.queryForObject(countOrdersSql, whereClause.getArgs(), Long.class);
 
     int startRow = pageNumber * pageSize;
     int endRow = startRow + pageSize;
 
-    final List<OrderResource> items = jdbc.query(queries.getOrders(), args, rowMapper);
+    final String getOrdersSql = queries.getOrders() + whereClause.getQuery();
+    final List<OrderResource> items = jdbc.query(getOrdersSql, whereClause.getArgs(), rowMapper);
 
     int totalPages = (int) (rowsCount / pageSize);
     if (rowsCount % pageSize != 0) {
@@ -66,18 +72,63 @@ class OrderQueryRepository {
 
   private static final class OrderResourceMapper implements RowMapper<OrderResource> {
 
+    private static final String ORDER_ID = "order_id";
+    private static final String CUSTOMER_ID = "customer_id";
+    private static final String PRODUCT_ID = "product_id";
+    private static final String CONTACT_PHONE = "contact_phone";
+    private static final String DELIVERY_ADDRESS = "delivery_address";
+    private static final String QUANTITY = "quantity";
+
     public OrderResource mapRow(ResultSet rs, int rowNum) throws SQLException {
       try {
         return new OrderResource()
-            .id(rs.getString("order_id"))
-            .customerId(rs.getString("customer_id"))
-            .productId(rs.getString("product_id"))
-            .contactPhone(rs.getString("contact_phone"))
-            .deliveryAddress(rs.getString("delivery_address"))
-            .quantity(rs.getInt("quantity"));
+            .id(rs.getString(ORDER_ID))
+            .customerId(rs.getString(CUSTOMER_ID))
+            .productId(rs.getString(PRODUCT_ID))
+            .contactPhone(rs.getString(CONTACT_PHONE))
+            .deliveryAddress(rs.getString(DELIVERY_ADDRESS))
+            .quantity(rs.getInt(QUANTITY));
       } catch (SQLException e) {
         throw new AppException.DataAccessException(
             "ExceptionOccurredWhileMappingOrderResultSet", e);
+      }
+    }
+
+    private static final class WhereClause {
+      private final Object[] args;
+      private final String query;
+
+      public WhereClause(OrderResource filter) {
+        StringBuilder query = new StringBuilder();
+        List<Object> list = new ArrayList<>();
+        if (filter != null) {
+          addFilter(query, list, ORDER_ID, filter.getId());
+          addFilter(query, list, PRODUCT_ID, filter.getProductId());
+          addFilter(query, list, CUSTOMER_ID, filter.getCustomerId());
+          addFilter(query, list, QUANTITY, filter.getQuantity());
+          addFilter(query, list, CONTACT_PHONE, filter.getContactPhone());
+          addFilter(query, list, DELIVERY_ADDRESS, filter.getDeliveryAddress());
+        }
+        this.args = list.toArray();
+        this.query = query.toString();
+      }
+
+      private void addFilter(
+          StringBuilder query, List<Object> args, String column, Object filterValue) {
+        Optional.ofNullable(filterValue)
+            .ifPresent(
+                value -> {
+                  query.append(" AND " + column + "=?");
+                  args.add(value);
+                });
+      }
+
+      public Object[] getArgs() {
+        return args;
+      }
+
+      public String getQuery() {
+        return query;
       }
     }
   }

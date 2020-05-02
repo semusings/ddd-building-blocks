@@ -119,6 +119,19 @@ class WebOrderApiTest extends InfrastructureSetup {
   }
 
   @Test
+  void ok_GetOrdersWithSort() {
+    // given
+    ok_CreateOrder();
+    PRODUCT_ID = "P02";
+    ok_CreateOrder();
+    // when
+    final OrderPageList actual = ordersApi.getOrders(null, "id,ASC", 1, 20);
+    // then
+    assertEquals(2, actual.getContent().size());
+    assertEquals(Long.valueOf(2), actual.getPage().getTotalElements());
+  }
+
+  @Test
   void ok_GetOrdersWithNextPage() throws JsonProcessingException {
     // given
     ok_CreateOrder();
