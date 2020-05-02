@@ -6,6 +6,7 @@ import feign.FeignException;
 import io.github.bhuwanupadhyay.rtms.order.App;
 import io.github.bhuwanupadhyay.rtms.orders.v1.http.*;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -122,17 +123,22 @@ class WebOrderApiTest extends InfrastructureSetup {
   void ok_GetOrdersWithSort() {
     // given
     ok_CreateOrder();
+    PRODUCT_ID = "P03";
+    ok_CreateOrder();
     PRODUCT_ID = "P02";
     ok_CreateOrder();
     // when
-    final OrderPageList actual = ordersApi.getOrders(null, "id,ASC", 1, 20);
+    final OrderPageList actual = ordersApi.getOrders(null, "productId,DESC", 1, 20);
     // then
-    assertEquals(2, actual.getContent().size());
-    assertEquals(Long.valueOf(2), actual.getPage().getTotalElements());
+    assertEquals(3, actual.getContent().size());
+    assertEquals(Long.valueOf(3), actual.getPage().getTotalElements());
+    assertEquals("P03", actual.getContent().get(0).getProductId());
+    assertEquals("P02", actual.getContent().get(1).getProductId());
+    assertEquals("P01", actual.getContent().get(2).getProductId());
   }
 
   @Test
-  void ok_GetOrdersWithNextPage() throws JsonProcessingException {
+  void ok_GetOrdersWithNextPage() {
     // given
     ok_CreateOrder();
     PRODUCT_ID = "P02";

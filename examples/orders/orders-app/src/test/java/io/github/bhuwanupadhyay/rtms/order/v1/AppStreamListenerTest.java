@@ -27,7 +27,12 @@ class AppStreamListenerTest {
   void whenProductReserved_thenShouldSubmitPayment() {
     final String orderId = "orderId";
 
-    this.listener.on(ProductsReserved.newBuilder().setOrderId(orderId).build());
+    this.listener.on(
+        ProductsReserved.newBuilder()
+            .setOrderId(orderId)
+            .setProductId("P01")
+            .setQuantity(1)
+            .build());
 
     then(appService).should().submitPayment(eq(orderId));
   }
