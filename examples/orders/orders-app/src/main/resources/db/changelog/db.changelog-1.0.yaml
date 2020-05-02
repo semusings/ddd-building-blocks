@@ -1,0 +1,31 @@
+# Schema Setup
+databaseChangeLog:
+  - changeSet:
+      id: 10000
+      author: developerbhuwan
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: rtms_order_pkey
+                  name: orderId
+                  type: VARCHAR(50)
+              - column:
+                  name: productId
+                  type: VARCHAR(50)
+              - column:
+                  name: customerId
+                  type: VARCHAR(50)
+              - column:
+                  name: deliveryAddress
+                  type: VARCHAR(1000)
+              - column:
+                  name: contactPhone
+                  type: VARCHAR(20)
+              - column:
+                  name: quantity
+                  type: int
+            tableName: rtms_order

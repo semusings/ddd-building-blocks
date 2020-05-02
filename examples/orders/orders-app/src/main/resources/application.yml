@@ -1,6 +1,12 @@
+logging:
+  level:
+    liquibase: INFO
 spring:
   application:
     name: orders
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
   cloud:
     stream:
       rabbit:

@@ -30,14 +30,22 @@ class WebOrderApi implements OrdersApi {
 
   @Override
   public Mono<ResponseEntity<OrderPageList>> getOrders(
-      String filterJson, String sort, ServerWebExchange exchange) {
+      String filterJson,
+      String sort,
+      Integer pageNumber,
+      Integer pageSize,
+      ServerWebExchange exchange) {
     LOG.atInfo().log(DASH_LINE + "Receive get orders http request.");
     LOG.atFinest().log("FilterJson: %s ", filterJson);
     LOG.atFinest().log("Sort: %s ", sort);
+    LOG.atFinest().log("PageSize: %d ", pageSize);
+    LOG.atFinest().log("PageNumber: %d ", pageNumber);
     try {
       final OrderResource filterResource =
           this.objectMapper.readValue(filterJson, OrderResource.class);
-      return Mono.just(ResponseEntity.ok(this.queryRepository.findAll(filterResource, sort)));
+      return Mono.just(
+          ResponseEntity.ok(
+              this.queryRepository.findAll(filterResource, pageSize, pageNumber, sort)));
     } catch (JsonProcessingException e) {
       LOG.atSevere().withCause(e).log("Error on converting filterJson to OrderResource");
       throw new BadRequest("NotAbleToConvertFilterJsonToOrderResource");

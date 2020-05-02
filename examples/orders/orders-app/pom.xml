@@ -45,7 +45,11 @@
 		</dependency>
 
 		<!-- Runtime Dependencies -->
-
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>

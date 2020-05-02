@@ -52,6 +52,10 @@ components:
       properties:
         pageSize:
           type: integer
+        pageNumber:
+          type: integer
+        sort:
+          type: string
         totalElements:
           type: integer
           format: int64
@@ -100,6 +104,14 @@ paths:
             type: string
           in: query
           name: sort
+        - schema:
+            type: integer
+          in: query
+          name: pageNumber
+        - schema:
+            type: integer
+          in: query
+          name: pageSize
     post:
       summary: POST orders.
       operationId: post-orders
