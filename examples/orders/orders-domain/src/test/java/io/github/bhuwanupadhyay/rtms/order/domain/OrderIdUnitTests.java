@@ -1,11 +1,11 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import io.github.bhuwanupadhyay.ddd.DomainAssertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class OrderIdTest {
+class OrderIdUnitTests {
 
   @Test
   void canEqualsByValues() {

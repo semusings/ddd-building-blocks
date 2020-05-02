@@ -1,12 +1,12 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
-import org.junit.jupiter.api.Test;
-
 import static io.github.bhuwanupadhyay.ddd.DomainAssertions.assertThat;
 import static io.github.bhuwanupadhyay.ddd.Entity.ENTITY_ID_IS_REQUIRED;
 import static io.github.bhuwanupadhyay.rtms.order.domain.OrderId.ORDER_ID_IS_REQUIRED;
 
-class OrderTest {
+import org.junit.jupiter.api.Test;
+
+class OrderUnitTests {
 
   @Test
   void givenEmptyOrderId_thenOrderShouldNotCreated() {

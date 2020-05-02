@@ -1,12 +1,13 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
+import static org.junit.Assert.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import io.github.bhuwanupadhyay.rtms.order.App;
 import io.github.bhuwanupadhyay.rtms.orders.v1.http.*;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +19,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.junit.Assert.*;
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(initializers = {WebOrderApiTest.Initializer.class})
+@ContextConfiguration(initializers = {WebOrderApiIntegrationTests.Initializer.class})
 @Testcontainers
-class WebOrderApiTest extends InfrastructureSetup {
+class WebOrderApiIntegrationTests extends TestSetup {
 
   private static final ObjectMapper MAPPER = AppUtils.createObjectMapper();
   public static String CUSTOMER_ID;

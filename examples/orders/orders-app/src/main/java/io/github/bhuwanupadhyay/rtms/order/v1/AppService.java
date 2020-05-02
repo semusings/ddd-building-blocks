@@ -4,9 +4,8 @@ import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.domain.*;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import io.github.bhuwanupadhyay.rtms.orders.v1.CreateOrder;
-import org.springframework.stereotype.Service;
-
 import java.util.UUID;
+import org.springframework.stereotype.Service;
 
 @Service
 class AppService {

@@ -1,11 +1,10 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
+import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
+
 import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.ValueObject;
-
 import java.util.Objects;
-
-import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
 
 public final class OrderId extends ValueObject {
 

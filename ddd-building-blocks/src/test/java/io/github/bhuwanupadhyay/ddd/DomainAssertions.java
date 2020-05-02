@@ -1,9 +1,8 @@
 package io.github.bhuwanupadhyay.ddd;
 
 // tag::code[]
-import org.assertj.core.api.AbstractAssert;
-
 import java.util.List;
+import org.assertj.core.api.AbstractAssert;
 
 public final class DomainAssertions {
 

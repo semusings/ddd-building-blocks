@@ -8,11 +8,11 @@ import io.github.bhuwanupadhyay.rtms.order.domain.OrderPlaced;
 import io.github.bhuwanupadhyay.rtms.order.domain.PaymentRequested;
 import io.github.bhuwanupadhyay.rtms.order.domain.ShippingRequested;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.MessageStreamException;
-import io.github.bhuwanupadhyay.rtms.v1.ProductShipped;
 import io.github.bhuwanupadhyay.rtms.v1.ReserveProducts;
 import io.github.bhuwanupadhyay.rtms.v1.ShipProducts;
 import io.github.bhuwanupadhyay.rtms.v1.SubmitPayment;
-import org.apache.avro.Schema;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,9 +20,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @EnableBinding(AppStream.class)

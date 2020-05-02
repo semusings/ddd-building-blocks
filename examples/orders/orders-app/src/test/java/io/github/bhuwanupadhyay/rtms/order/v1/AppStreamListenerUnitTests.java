@@ -1,5 +1,8 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.then;
+
 import io.github.bhuwanupadhyay.rtms.order.v1.AppStream.AppStreamListener;
 import io.github.bhuwanupadhyay.rtms.v1.ProductsReserved;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,11 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.then;
-
 @ExtendWith(MockitoExtension.class)
-class AppStreamListenerTest {
+class AppStreamListenerUnitTests {
 
   private AppStreamListener listener;
 

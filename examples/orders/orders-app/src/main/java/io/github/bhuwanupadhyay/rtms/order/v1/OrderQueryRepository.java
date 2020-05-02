@@ -6,11 +6,10 @@ import io.github.bhuwanupadhyay.rtms.order.v1.OrderRowMapper.OrderCriteria;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.PageResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 @Repository
 class OrderQueryRepository {
@@ -42,11 +41,13 @@ class OrderQueryRepository {
 
     final String countOrdersSql = queries.getCountOrders() + criteria.getCriteriaQuery();
 
-    final Long rowsCount = jdbc.queryForObject(countOrdersSql, criteria.getCriteriaArgs(), Long.class);
+    final Long rowsCount =
+        jdbc.queryForObject(countOrdersSql, criteria.getCriteriaArgs(), Long.class);
 
     final String getOrdersSql = queries.getOrders() + criteria.getFullCriteriaQuery();
 
-    final List<OrderResource> items = jdbc.query(getOrdersSql, criteria.getFullCriteriaArgs(), rowMapper);
+    final List<OrderResource> items =
+        jdbc.query(getOrdersSql, criteria.getFullCriteriaArgs(), rowMapper);
 
     int totalPages = (int) (rowsCount / pageSize);
     if (rowsCount % pageSize != 0) {

@@ -2,12 +2,12 @@ package io.github.bhuwanupadhyay.ddd;
 
 // tag::code[]
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 public final class DomainValidationException extends RuntimeException {
 

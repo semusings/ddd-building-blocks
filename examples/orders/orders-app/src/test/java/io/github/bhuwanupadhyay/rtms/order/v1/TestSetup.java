@@ -4,7 +4,7 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
-abstract class InfrastructureSetup {
+abstract class TestSetup {
 
   //  @Container
   //  private static final PostgreSQLContainer SQL_CONTAINER =
