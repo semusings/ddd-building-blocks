@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 class WebErrorAdvice {
-  private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   @ExceptionHandler
   Mono<ResponseEntity<ErrorList>> handleDomainErrors(DomainValidationException e) {
