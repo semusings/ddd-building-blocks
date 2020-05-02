@@ -1,2 +1,2 @@
-SELECT count(*) FROM
-orders
+SELECT count(orderId) FROM
+rtms_order

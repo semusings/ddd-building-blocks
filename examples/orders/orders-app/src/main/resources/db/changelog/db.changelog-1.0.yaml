@@ -7,7 +7,6 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     primaryKeyName: rtms_order_pkey

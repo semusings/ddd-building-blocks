@@ -35,29 +35,34 @@ public final class DomainAsserts {
     }
 
     public DomainAssert<T> notNull(Supplier<DomainError> error) {
-      if (Objects.isNull(this.actual)) {
-        this.domainErrors.add(error.get());
-      }
+      isNotNull(error);
       return this;
     }
 
     public DomainAssert<T> notBlank(Supplier<DomainError> error) {
-      notNull(error);
+      final boolean notNull = isNotNull(error);
 
-      String s = (String) this.actual;
+      if (notNull) {
+        String s = (String) this.actual;
 
-      if (s.isBlank()) {
-        this.domainErrors.add(error.get());
+        if (s.isBlank()) {
+          this.domainErrors.add(error.get());
+        }
       }
+
       return this;
     }
 
     public DomainAssert<T> raiseIf(Predicate<T> predicate, Supplier<DomainError> error) {
-      notNull(error);
+      final boolean notNull = isNotNull(error);
 
-      if (predicate.test(this.actual)) {
-        this.domainErrors.add(error.get());
+      if (notNull) {
+
+        if (predicate.test(this.actual)) {
+          this.domainErrors.add(error.get());
+        }
       }
+
       return this;
     }
 
@@ -70,6 +75,14 @@ public final class DomainAsserts {
 
     public <S> DomainAssert<S> switchOn(S value) {
       return DomainAsserts.begin(value, this.domainErrors);
+    }
+
+    private boolean isNotNull(Supplier<DomainError> error) {
+      if (Objects.isNull(this.actual)) {
+        this.domainErrors.add(error.get());
+        return false;
+      }
+      return true;
     }
   }
 }

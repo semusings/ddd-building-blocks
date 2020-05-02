@@ -23,10 +23,10 @@ abstract class InfrastructureSetup {
   private static final RabbitMQContainer MQ_CONTAINER =
       new RabbitMQContainer().withUser("mq_user", "mq_password");
 
-  @Container
-  private static final GenericContainer EVENT_STORE =
-      new GenericContainer(new RemoteDockerImage("eventstore/eventstore:latest"))
-          .withExposedPorts(2113);
+  //  @Container
+  //  private static final GenericContainer EVENT_STORE =
+  //      new GenericContainer(new RemoteDockerImage("eventstore/eventstore:latest"))
+  //          .withExposedPorts(2113);
 
   static class Initializer
       implements ApplicationContextInitializer<ConfigurableApplicationContext> {

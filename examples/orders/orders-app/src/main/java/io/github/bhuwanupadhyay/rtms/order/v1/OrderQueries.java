@@ -15,6 +15,7 @@ class OrderQueries {
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   private final String orderById;
+  private final String saveOrder;
   private final String orders;
   private final String countOrders;
 
@@ -22,6 +23,7 @@ class OrderQueries {
     this.orders = readSQLQuery("queries/get-orders.sql");
     this.orderById = readSQLQuery("queries/get-order-by-id.sql");
     this.countOrders = readSQLQuery("queries/count-orders.sql");
+    this.saveOrder = readSQLQuery("queries/save-order.sql");
   }
 
   private String readSQLQuery(String path) {
@@ -48,4 +50,8 @@ class OrderQueries {
   public String getCountOrders() {
     return countOrders;
   }
+
+	public String getSaveOrder() {
+    return saveOrder;
+	}
 }

@@ -1,4 +1,4 @@
 SELECT * FROM
-orders
+rtms_order
 WHERE
-order_id=?
+orderId=?

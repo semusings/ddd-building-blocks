@@ -5,33 +5,38 @@ import io.github.bhuwanupadhyay.ddd.DomainRepository;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.DataAccessException;
+
+import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 class OrderDomainRepository extends DomainRepository<Order, OrderId> {
 
-  private final SpringDataOrderRepository dataRepository;
-  private final OrderDbMapper dataMapper;
+  private final JdbcTemplate jdbc;
+  private final OrderQueries queries;
 
-  OrderDomainRepository(
-      DomainEventPublisher publisher,
-      SpringDataOrderRepository dataRepository,
-      OrderDbMapper dataMapper) {
+  OrderDomainRepository(DomainEventPublisher publisher, JdbcTemplate jdbc, OrderQueries queries) {
     super(publisher);
-    this.dataRepository = dataRepository;
-    this.dataMapper = dataMapper;
+    this.jdbc = jdbc;
+    this.queries = queries;
   }
 
   @Override
   public Optional<Order> findOne(OrderId orderId) {
-    return dataRepository.findById(orderId.getId()).map(dataMapper::toOrder);
+    final Map<String, Object> result =
+        this.jdbc.queryForMap(queries.getOrderById(), orderId.getId());
+
+    return Optional.ofNullable(result)
+        .map(map -> new Order(new OrderId((String) map.get("orderId"))));
   }
 
   @Override
   protected void persist(Order entity) {
     try {
-      dataRepository.save(dataMapper.toOrderData(entity));
+      jdbc.update(queries.getSaveOrder(), entity.getId().getId());
     } catch (Exception e) {
       throw new DataAccessException("ExceptionOccurredWhileSavingOrder", e);
     }
