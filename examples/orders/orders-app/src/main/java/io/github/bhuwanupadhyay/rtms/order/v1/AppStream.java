@@ -1,6 +1,8 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
+import io.github.bhuwanupadhyay.rtms.v1.PaymentApproved;
+import io.github.bhuwanupadhyay.rtms.v1.ProductShipped;
 import io.github.bhuwanupadhyay.rtms.v1.ProductsReserved;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Input;
@@ -27,8 +29,6 @@ interface AppStream {
 
     private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
-    final String PRODUCTS_RESERVED = "io.github.bhuwanupadhyay.rtms.v1.ProductsReserved";
-
     private final AppService appService;
 
     public AppStreamListener(AppService appService) {
@@ -37,8 +37,20 @@ interface AppStream {
 
     @StreamListener(target = AppStream.IN)
     void on(ProductsReserved productsReserved) {
-      LOG.atInfo().log("Received stream event %s:", PRODUCTS_RESERVED);
+      LOG.atInfo().log("Received stream event %s:", ProductsReserved.class.getName());
       this.appService.submitPayment(productsReserved.getOrderId().toString());
+    }
+
+    @StreamListener(target = AppStream.IN)
+    void on(PaymentApproved paymentApproved) {
+      LOG.atInfo().log("Received stream event %s:", PaymentApproved.class.getName());
+      this.appService.shipProducts(paymentApproved.getOrderId().toString());
+    }
+
+    @StreamListener(target = AppStream.IN)
+    void on(ProductShipped productShipped) {
+      LOG.atInfo().log("Received stream event %s:", ProductShipped.class.getName());
+      this.appService.confirmOrder(productShipped.getOrderId().toString());
     }
   }
 }

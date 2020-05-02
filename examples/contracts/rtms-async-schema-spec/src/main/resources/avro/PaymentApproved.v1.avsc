@@ -1,5 +1,5 @@
 {
-  "name": "SubmitPayment",
+  "name": "PaymentApproved",
   "type": "record",
   "namespace": "io.github.bhuwanupadhyay.rtms.v1",
   "fields": [

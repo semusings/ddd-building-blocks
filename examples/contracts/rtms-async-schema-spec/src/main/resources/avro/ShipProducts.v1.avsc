@@ -1,15 +1,11 @@
 {
-  "name": "SubmitPayment",
+  "name": "ShipProducts",
   "type": "record",
   "namespace": "io.github.bhuwanupadhyay.rtms.v1",
   "fields": [
     {
       "name": "orderId",
       "type": "string"
-    },
-    {
-        "name": "totalAmount",
-        "type": "string"
     }
   ]
 }

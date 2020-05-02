@@ -3,9 +3,15 @@ package io.github.bhuwanupadhyay.rtms.order.v1;
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
+import io.github.bhuwanupadhyay.rtms.order.domain.ConfirmationRequested;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderPlaced;
+import io.github.bhuwanupadhyay.rtms.order.domain.PaymentRequested;
+import io.github.bhuwanupadhyay.rtms.order.domain.ShippingRequested;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.MessageStreamException;
+import io.github.bhuwanupadhyay.rtms.v1.ProductShipped;
 import io.github.bhuwanupadhyay.rtms.v1.ReserveProducts;
+import io.github.bhuwanupadhyay.rtms.v1.ShipProducts;
+import io.github.bhuwanupadhyay.rtms.v1.SubmitPayment;
 import org.apache.avro.Schema;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -62,6 +68,23 @@ class AppDomainEventPublisher implements DomainEventPublisher {
                     .build())
             .copyHeaders(buildHeaders(ReserveProducts.class))
             .build();
+      } else if (domainEvent instanceof PaymentRequested) {
+        final PaymentRequested paymentRequested = (PaymentRequested) domainEvent;
+        return MessageBuilder.withPayload(
+                SubmitPayment.newBuilder()
+                    .setOrderId(paymentRequested.getOrderId().getId())
+                    .setTotalAmount("USD 1000.00")
+                    .build())
+            .copyHeaders(buildHeaders(ReserveProducts.class))
+            .build();
+      } else if (domainEvent instanceof ShippingRequested) {
+        final ShippingRequested paymentRequested = (ShippingRequested) domainEvent;
+        return MessageBuilder.withPayload(
+                ShipProducts.newBuilder().setOrderId(paymentRequested.getOrderId().getId()).build())
+            .copyHeaders(buildHeaders(ReserveProducts.class))
+            .build();
+      } else if (domainEvent instanceof ConfirmationRequested) {
+        LOG.atInfo().log("Notified to user for confirmation.");
       }
 
       throw new MessageStreamException(domainEvent);

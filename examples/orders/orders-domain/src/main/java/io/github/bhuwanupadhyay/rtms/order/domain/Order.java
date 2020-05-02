@@ -42,11 +42,20 @@ public final class Order extends AggregateRoot<OrderId> implements OrderParams {
     this.product = product;
     this.customer = customer;
     this.quantity = quantity;
-
     this.registerEvent(new OrderPlaced(this.getId(), this.product, this.quantity));
   }
 
-  public void createPayment() {}
+  public void createPayment() {
+    this.registerEvent(new PaymentRequested(this.getId()));
+  }
+
+  public void shipProducts() {
+    this.registerEvent(new ShippingRequested(this.getId()));
+  }
+
+  public void confirmOrder() {
+    this.registerEvent(new ConfirmationRequested(this.getId()));
+  }
 
   @Override
   public Optional<String> getContactPhone() {
