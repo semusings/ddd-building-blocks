@@ -5,8 +5,9 @@ import io.github.bhuwanupadhyay.ddd.DomainRepository;
 import io.github.bhuwanupadhyay.rtms.order.domain.Order;
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.DataAccessException;
-import java.util.Optional;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 class OrderDomainRepository extends DomainRepository<Order, OrderId> {

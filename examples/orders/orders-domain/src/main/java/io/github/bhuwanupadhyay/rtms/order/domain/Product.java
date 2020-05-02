@@ -1,6 +1,7 @@
 package io.github.bhuwanupadhyay.rtms.order.domain;
 
 import io.github.bhuwanupadhyay.ddd.ValueObject;
+
 import java.util.Objects;
 
 public final class Product extends ValueObject {
