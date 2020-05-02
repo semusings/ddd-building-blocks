@@ -1,6 +1,5 @@
 package io.github.bhuwanupadhyay.ddd;
 
-// tag::code[]
 import java.util.Optional;
 
 public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends ValueObject> {
@@ -22,4 +21,3 @@ public abstract class DomainRepository<T extends AggregateRoot<ID>, ID extends V
 
   protected abstract void persist(T entity);
 }
-// end::code[]

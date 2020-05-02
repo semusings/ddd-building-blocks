@@ -1,8 +1,8 @@
 package io.github.bhuwanupadhyay.ddd;
 
-// tag::code[]
-import java.util.List;
 import org.assertj.core.api.AbstractAssert;
+
+import java.util.List;
 
 public final class DomainAssertions {
 
@@ -61,4 +61,3 @@ public final class DomainAssertions {
     }
   }
 }
-// end::code[]

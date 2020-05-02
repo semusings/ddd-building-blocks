@@ -18,7 +18,7 @@ In this article, I will take you through the best available options for building
 
 ## Value Object
 
-<script charset="UTF-8" src="https://gist-it.appspot.com/github.com/flowerinthenight/rusttrace/blob/master/src/main.rs?footer=minimal"></script>
+<script charset="UTF-8" src="https://gist-it.appspot.com/github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/blob/master/ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd/ValueObject.java?footer=minimal"></script>
 
 ## Entity
 
