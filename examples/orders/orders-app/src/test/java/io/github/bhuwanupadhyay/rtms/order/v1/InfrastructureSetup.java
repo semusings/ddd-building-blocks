@@ -18,9 +18,7 @@ abstract class InfrastructureSetup {
           .withUsername("postgres_user")
           .withPassword("postgres_password");
 
-  @Container
-  private static final RabbitMQContainer MQ_CONTAINER =
-      new RabbitMQContainer().withUser("mq_user", "mq_password");
+  @Container private static final RabbitMQContainer MQ_CONTAINER = new RabbitMQContainer();
 
   //  @Container
   //  private static final GenericContainer EVENT_STORE =
@@ -35,8 +33,8 @@ abstract class InfrastructureSetup {
               // Data Source Configuration
               "spring.rabbitmq.host=" + URI.create(MQ_CONTAINER.getHttpUrl()).getHost(),
               "spring.rabbitmq.port=" + MQ_CONTAINER.getHttpPort(),
-              "spring.rabbitmq.username=" + MQ_CONTAINER.getAdminUsername(),
-              "spring.rabbitmq.password=" + MQ_CONTAINER.getAdminPassword(),
+              // "spring.rabbitmq.username=" + MQ_CONTAINER.getAdminUsername(),
+              // "spring.rabbitmq.password=" + MQ_CONTAINER.getAdminPassword(),
               // ----
               // Data Source Configuration
               "spring.datasource.url=" + SQL_CONTAINER.getJdbcUrl(),

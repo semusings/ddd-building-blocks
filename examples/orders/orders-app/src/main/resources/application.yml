@@ -19,5 +19,8 @@ spring:
           contentType: 'application/*+avro'
           group: rtms
         rtmsOrdersIn:
+          contentType: 'application/*+avro'
           destination: rtmsOrdersIn
           group: rtms
+      schemaRegistryClient:
+        cached: true

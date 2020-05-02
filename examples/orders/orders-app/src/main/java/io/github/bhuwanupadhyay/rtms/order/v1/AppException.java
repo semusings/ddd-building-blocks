@@ -1,5 +1,7 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
+import io.github.bhuwanupadhyay.ddd.DomainEvent;
+
 abstract class AppException extends RuntimeException {
 
   private final String errorCode;
@@ -46,8 +48,10 @@ abstract class AppException extends RuntimeException {
   }
 
   static class MessageStreamException extends AppException {
-    MessageStreamException(String errorCode) {
-      super(errorCode, "");
+    MessageStreamException(DomainEvent event) {
+      super(
+          event.getEventClassName() + ".AvroSchemaNotDefined",
+          "Avro schema not defined for domain event [" + event.getEventClassName() + "]");
     }
   }
 }

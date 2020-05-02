@@ -3,9 +3,10 @@ package io.github.bhuwanupadhyay.rtms.order.v1;
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
-import io.github.bhuwanupadhyay.rtms.order.domain.PaymentRequested;
+import io.github.bhuwanupadhyay.rtms.order.domain.OrderPlaced;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.MessageStreamException;
-import io.github.bhuwanupadhyay.rtms.v1.SubmitPayment;
+import io.github.bhuwanupadhyay.rtms.v1.ReserveProducts;
+import org.apache.avro.Schema;
 import org.apache.avro.specific.SpecificRecord;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Component
 @EnableBinding(AppStream.class)
@@ -50,20 +50,27 @@ class AppDomainEventPublisher implements DomainEventPublisher {
 
   static class StreamMessageFactory {
 
-    private static final Map<Class<? extends DomainEvent>, Class<? extends SpecificRecord>>
-        NAMESPACES = Map.of(PaymentRequested.class, SubmitPayment.class);
-
-    private StreamMessageFactory() {}
-
     static Message<?> create(DomainEvent domainEvent) {
+
+      if (domainEvent instanceof OrderPlaced) {
+        final OrderPlaced orderPlaced = (OrderPlaced) domainEvent;
+        return MessageBuilder.withPayload(
+                ReserveProducts.newBuilder()
+                    .setOrderId(orderPlaced.getOrderId().getId())
+                    .setProductId(orderPlaced.getProduct().getProductId())
+                    .setQuantity(orderPlaced.getQuantity().getValue())
+                    .build())
+            .copyHeaders(buildHeaders(ReserveProducts.class))
+            .build();
+      }
+
+      throw new MessageStreamException(domainEvent);
+    }
+
+    private static MessageHeaders buildHeaders(Class<? extends SpecificRecord> clazz) {
       Map<String, Object> headers = new HashMap<>();
-
-      Class<? extends SpecificRecord> namespace =
-          Optional.ofNullable(NAMESPACES.get(domainEvent.getClass()))
-              .orElseThrow(() -> new MessageStreamException("DomainEvent.AvroSchema.NotDefined"));
-      headers.put("namespace", namespace.getName());
-
-      return MessageBuilder.createMessage("", new MessageHeaders(headers));
+      headers.put("namespace", clazz.getName());
+      return new MessageHeaders(headers);
     }
   }
 }

@@ -13,6 +13,7 @@
 
 	<modules>
 		<module>orders</module>
+		<module>schema-registry</module>
 	</modules>
 
 

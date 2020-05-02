@@ -42,6 +42,8 @@ public final class Order extends AggregateRoot<OrderId> implements OrderParams {
     this.product = product;
     this.customer = customer;
     this.quantity = quantity;
+
+    this.registerEvent(new OrderPlaced(this.getId(), this.product, this.quantity));
   }
 
   public void createPayment() {}
