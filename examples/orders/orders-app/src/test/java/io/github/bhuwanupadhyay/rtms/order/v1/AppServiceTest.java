@@ -1,17 +1,16 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
+import static org.mockito.BDDMockito.given;
+
 import io.github.bhuwanupadhyay.rtms.order.domain.OrderId;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
-
-import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class AppServiceTest {
