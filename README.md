@@ -37,4 +37,4 @@ In this article, I will take you through the best available options for building
 
 ## Example Scenario
 
-![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/rtms.png)
+![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/rtms.png){:width="50%"}
