@@ -3,13 +3,17 @@
 		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>contracts</artifactId>
 		<groupId>io.github.bhuwanupadhyay</groupId>
-		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>contracts</artifactId>
+		<version>1.0.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>rtms-async-schema-spec</artifactId>
+
+	<properties>
+		<avro.version>1.9.2</avro.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -18,9 +22,6 @@
 			<version>${avro.version}</version>
 		</dependency>
 	</dependencies>
-	<properties>
-		<avro.version>1.9.2</avro.version>
-	</properties>
 
 	<build>
 		<plugins>
