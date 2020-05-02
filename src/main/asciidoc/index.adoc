@@ -16,7 +16,3 @@ include::intro.adoc[]
 == Quick Start
 
 include::quickstart.adoc[]
-
-== Article
-
-include::article.adoc[]

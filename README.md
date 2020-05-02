@@ -15,3 +15,26 @@ Separating these two in the software itself makes it easier to design, model, bu
 
 In the implementation, DDD building blocks play an important role in how business is modeled into the code.
 In this article, I will take you through the best available options for building blocks in object-oriented principles.
+
+## Value Object
+
+<script charset="UTF-8" src="https://gist-it.appspot.com/github.com/flowerinthenight/rusttrace/blob/master/src/main.rs?footer=minimal"></script>
+
+## Entity
+
+## Domain Error, Exception and Assertion
+
+
+## Domain Event
+
+![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/src/main/assets/aggregate_transaction.png)
+
+## Service
+
+## Repositories
+
+## Factories
+
+## Example Scenario
+
+![](https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/src/main/assets/rtms.png)
