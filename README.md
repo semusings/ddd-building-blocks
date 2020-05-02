@@ -18,7 +18,7 @@ In this article, I will take you through the best available options for building
 
 ## Value Object
 
-<script charset="UTF-8" src="https://gist-it.appspot.com/github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/blob/master/ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd/ValueObject.java?footer=minimal"></script>
+<script type="text/javascript" charset="UTF-8" src="https://gist-it.appspot.com/github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/blob/master/ddd-building-blocks/src/main/java/io/github/bhuwanupadhyay/ddd/ValueObject.java?footer=minimal"></script>
 
 ## Entity
 
@@ -37,4 +37,4 @@ In this article, I will take you through the best available options for building
 
 ## Example Scenario
 
-<img src="https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/rtms.png" height="50%">
+<img src="https://raw.githubusercontent.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/master/assets/rtms.png" height="400">
