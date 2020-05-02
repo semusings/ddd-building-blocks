@@ -5,7 +5,6 @@ import io.github.bhuwanupadhyay.rtms.orders.v1.http.ApiClient;
 import io.github.bhuwanupadhyay.rtms.orders.v1.http.CreateOrder;
 import io.github.bhuwanupadhyay.rtms.orders.v1.http.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.http.OrdersApi;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,14 +1,13 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
-import java.net.URI;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.RabbitMQContainer;
-import org.testcontainers.images.RemoteDockerImage;
 import org.testcontainers.junit.jupiter.Container;
+
+import java.net.URI;
 
 abstract class InfrastructureSetup {
 

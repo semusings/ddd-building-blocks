@@ -1,6 +1,5 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
-import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.ddd.DomainValidationException;
 import io.github.bhuwanupadhyay.rtms.orders.v1.ErrorList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.ErrorMessage;

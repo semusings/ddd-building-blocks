@@ -51,7 +51,7 @@ class OrderQueries {
     return countOrders;
   }
 
-	public String getSaveOrder() {
+  public String getSaveOrder() {
     return saveOrder;
-	}
+  }
 }
