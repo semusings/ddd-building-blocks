@@ -10,15 +10,15 @@ public final class DomainAssertions {
     try {
       callback.run();
       return new DomainValidationAssert(null);
-    } catch (DomainValidationException e) {
+    } catch (DomainException e) {
       return new DomainValidationAssert(e);
     }
   }
 
   public static class DomainValidationAssert
-      extends AbstractAssert<DomainValidationAssert, DomainValidationException> {
+      extends AbstractAssert<DomainValidationAssert, DomainException> {
 
-    private DomainValidationAssert(DomainValidationException exception) {
+    private DomainValidationAssert(DomainException exception) {
       super(exception, DomainValidationAssert.class);
     }
 

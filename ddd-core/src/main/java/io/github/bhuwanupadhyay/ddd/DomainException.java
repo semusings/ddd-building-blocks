@@ -7,13 +7,13 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
-public final class DomainValidationException extends RuntimeException {
+public final class DomainException extends RuntimeException {
 
   private final List<DomainError> domainErrors;
   private final List<String> errorCodes;
   private final String message;
 
-  public DomainValidationException(List<DomainError> errors) {
+  public DomainException(List<DomainError> errors) {
     this.domainErrors = Optional.ofNullable(errors).orElseGet(ArrayList::new);
     this.errorCodes = this.domainErrors.stream().map(DomainError::getErrorCode).collect(toList());
     this.message =

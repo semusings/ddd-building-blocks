@@ -1,6 +1,6 @@
 package io.github.bhuwanupadhyay.rtms.order.v1;
 
-import io.github.bhuwanupadhyay.ddd.DomainValidationException;
+import io.github.bhuwanupadhyay.ddd.DomainException;
 import io.github.bhuwanupadhyay.rtms.orders.v1.ErrorList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.ErrorMessage;
 import java.util.List;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 class WebErrorAdvice {
 
   @ExceptionHandler
-  Mono<ResponseEntity<ErrorList>> handleDomainErrors(DomainValidationException e) {
+  Mono<ResponseEntity<ErrorList>> handleDomainErrors(DomainException e) {
     final List<ErrorMessage> errorMessages =
         e.getDomainErrors().stream()
             .map(

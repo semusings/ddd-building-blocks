@@ -68,7 +68,7 @@ public final class DomainAsserts {
       if (this.domainErrors.isEmpty()) {
         return;
       }
-      throw new DomainValidationException(this.domainErrors);
+      throw new DomainException(this.domainErrors);
     }
 
     public <S> DomainAssert<S> switchOn(S value) {
