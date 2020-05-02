@@ -5,23 +5,27 @@ import io.github.bhuwanupadhyay.rtms.order.v1.AppException.EntityNotFound;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderPageList;
 import io.github.bhuwanupadhyay.rtms.orders.v1.OrderResource;
 import io.github.bhuwanupadhyay.rtms.orders.v1.PageResource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
-@RequiredArgsConstructor
 class OrderQueryRepository {
 
   private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
 
   private final JdbcTemplate jdbc;
   private final OrderQueries queries;
+
+  public OrderQueryRepository(JdbcTemplate jdbc, OrderQueries queries) {
+    this.jdbc = jdbc;
+    this.queries = queries;
+  }
 
   public OrderResource findByOrderId(String orderId) {
     LOG.atInfo().log("Find order by order id %s", orderId);

@@ -2,14 +2,13 @@ package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.order.v1.AppException.DataAccessException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 
-@Getter
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 @Component
 class OrderQueries {
 
@@ -36,5 +35,17 @@ class OrderQueries {
       LOG.atSevere().withCause(e).log("Unable to load sql query file %s in classpath.", path);
       throw new DataAccessException("", e);
     }
+  }
+
+  public String getOrderById() {
+    return orderById;
+  }
+
+  public String getOrders() {
+    return orders;
+  }
+
+  public String getCountOrders() {
+    return countOrders;
   }
 }

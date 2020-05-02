@@ -2,7 +2,6 @@ package io.github.bhuwanupadhyay.rtms.order.v1;
 
 import com.google.common.flogger.FluentLogger;
 import io.github.bhuwanupadhyay.rtms.v1.ProductsReserved;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -24,7 +23,6 @@ interface AppStream {
 
   @Component
   @EnableBinding(AppStream.class)
-  @RequiredArgsConstructor
   class AppStreamListener {
 
     private static final FluentLogger LOG = FluentLogger.forEnclosingClass();
@@ -32,6 +30,10 @@ interface AppStream {
     final String PRODUCTS_RESERVED = "io.github.bhuwanupadhyay.rtms.v1.ProductsReserved";
 
     private final AppService appService;
+
+    public AppStreamListener(AppService appService) {
+      this.appService = appService;
+    }
 
     @StreamListener(target = AppStream.IN)
     void on(ProductsReserved productsReserved) {
