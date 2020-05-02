@@ -15,6 +15,24 @@ servers:
     url: 'https://bhuwanupdhyay.github.io'
 components:
   schemas:
+    ErrorList:
+      title: ErrorList
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: Error list.
+    ErrorMessage:
+      title: ErrorMessage
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+      description: Error message.
     OrderPageList:
       title: OrderPageList
       type: object
@@ -122,6 +140,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrderResource'
+        '400':
+          description: BAD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
       description: Create new order API.
       requestBody:
         content:

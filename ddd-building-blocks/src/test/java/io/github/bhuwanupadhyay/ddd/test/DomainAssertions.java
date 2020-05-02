@@ -4,8 +4,7 @@ import io.github.bhuwanupadhyay.ddd.DomainError;
 import io.github.bhuwanupadhyay.ddd.DomainValidationException;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import org.assertj.core.api.AbstractAssert;
 
 public final class DomainAssertions {
@@ -44,7 +43,7 @@ public final class DomainAssertions {
       if (this.actual != null) {
         failWithMessage(
             "Found total <%d> domain errors but expected zero errors.%s",
-            errorCodes().count(), prettyCodeErrors());
+            this.actual.getTotalErrors(), this.actual.getMessage());
       }
 
       return this;
@@ -54,24 +53,14 @@ public final class DomainAssertions {
       this.hasErrors();
 
       long count =
-          errorCodes().filter(Objects::nonNull).filter(error -> error.endsWith(errorCode)).count();
+          this.actual.getErrorCodes().stream().filter(error -> error.endsWith(errorCode)).count();
 
       if (count != 1) {
         failWithMessage(
             "%s exists <%d> times on errors but expected <1> times.%s",
-            errorCode, count, prettyCodeErrors());
+            errorCode, count, this.actual.getMessage());
       }
       return this;
-    }
-
-    private Stream<String> errorCodes() {
-      return this.actual.getDomainErrors().stream().map(DomainError::getErrorCode);
-    }
-
-    private String prettyCodeErrors() {
-      return String.format(
-          "\n--------\nACTUAL_ERRORS: [\n%s\n]\n--------\n",
-          errorCodes().collect(Collectors.joining(",\n")));
     }
   }
 }
