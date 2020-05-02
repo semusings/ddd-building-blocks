@@ -43,8 +43,10 @@ class WebOrderApi implements OrdersApi {
     LOG.atFinest().log("PageSize: %d ", pageSize);
     LOG.atFinest().log("PageNumber: %d ", pageNumber);
     try {
-      final OrderResource filterResource =
-          this.objectMapper.readValue(filterJson, OrderResource.class);
+      OrderResource filterResource = null;
+      if (filterJson != null) {
+        filterResource = this.objectMapper.readValue(filterJson, OrderResource.class);
+      }
       return Mono.just(
           ResponseEntity.ok(
               this.queryRepository.findAll(filterResource, pageSize, pageNumber, sort)));
