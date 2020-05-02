@@ -14,7 +14,7 @@
 	<modules>
 		<module>orders-domain</module>
 		<module>orders-app</module>
-		<module>orders-test</module>
+		<!--		<module>orders-test</module>-->
 	</modules>
 
 
