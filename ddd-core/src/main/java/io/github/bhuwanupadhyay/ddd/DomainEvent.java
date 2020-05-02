@@ -3,8 +3,6 @@ package io.github.bhuwanupadhyay.ddd;
 import java.util.Objects;
 import java.util.UUID;
 
-import static io.github.bhuwanupadhyay.ddd.DomainAsserts.begin;
-
 public abstract class DomainEvent {
 
   private final String eventId = UUID.randomUUID().toString();
@@ -14,7 +12,9 @@ public abstract class DomainEvent {
   private final String domainEventType;
 
   public DomainEvent(DomainEventType domainEventType) {
-    begin(domainEventType).notNull(DomainError.create(this, "DomainEventTypeIsRequired")).end();
+    DomainAsserts.begin(domainEventType)
+        .notNull(DomainError.create(this, "DomainEventTypeIsRequired"))
+        .end();
     this.domainEventType = domainEventType.name();
   }
 
