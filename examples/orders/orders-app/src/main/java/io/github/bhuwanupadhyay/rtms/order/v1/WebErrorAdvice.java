@@ -18,8 +18,6 @@ class WebErrorAdvice {
 
   @ExceptionHandler
   Mono<ResponseEntity<ErrorList>> handleDomainErrors(DomainValidationException e) {
-    LOG.atSevere().withCause(e).log(e.getMessage());
-
     final List<ErrorMessage> errorMessages =
         e.getDomainErrors().stream()
             .map(
