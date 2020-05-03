@@ -28,8 +28,8 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<name>DDD Building Blocks Best Practices</name>
-	<description>Demo Project to DDD Building Blocks Best Practices.</description>
+	<name>DDD Building Blocks</name>
+	<description>Demo Project to DDD Building Blocks.</description>
 	<url>https://github.com/BhuwanUpadhyay/17-ddd-building-blocks</url>
 
 	<properties>
