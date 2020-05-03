@@ -1,18 +1,18 @@
 {
-  "name": "17-ddd-building-blocks-best-practices",
+  "name": "17-ddd-building-blocks",
   "version": "0.0.0-snapshot",
   "description": "DDD Building Blocks Best Practices",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices.git"
+    "url": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks.git"
   },
   "author": "Bhuwan Prasad Upadhyay",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices/issues"
+    "url": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks/issues"
   },
-  "homepage": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks-best-practices#readme",
+  "homepage": "https://github.com/BhuwanUpadhyay/17-ddd-building-blocks#readme",
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
