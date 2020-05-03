@@ -6,4 +6,4 @@
 - https://bhuwanupadhyay.github.io/blog/ddd-building-blocks/
 
 ## Updated On
-- 2020/05/03 - Initial
+- `2020/05/03` - Initial
