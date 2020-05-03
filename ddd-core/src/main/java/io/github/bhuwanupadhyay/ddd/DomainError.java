@@ -52,7 +52,8 @@ public final class DomainError extends ValueObject {
     return () -> createError(type, AGGREGATE_ROOT, code);
   }
 
-  public static <T> Supplier<DomainError> create(final T type, final String code) {
+  public static <T extends DomainService> Supplier<DomainError> create(
+      final T type, final String code) {
     return () -> createError(type, DOMAIN_SERVICE, code);
   }
 
